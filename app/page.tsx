@@ -1,63 +1,36 @@
+import Spotlight from "./components/Spotlight";
+import AIChat from "./components/AIChat";
+import Header from "./components/Header";
+import AboutSection from "./components/AboutSection";
+import ExperienceSection from "./components/ExperienceSection";
+import ArchiveSection from "./components/ArchiveSection";
+import Footer from "./components/Footer";
+
 export default function Home() {
   return (
-    <div className="home-container">
-      <section className="hero">
-        <h1 className="hero-title">안녕하세요, 개발자입니다</h1>
-        <p className="hero-description">
-          창의적이고 혁신적인 웹 솔루션을 만드는 것을 좋아합니다. 사용자 경험을
-          최우선으로 생각하며, 최신 기술을 활용한 프로젝트를 진행합니다.
-        </p>
-        <div className="hero-buttons">
-          <a href="/archive" className="btn btn-primary">
-            프로젝트 보기
-          </a>
-          <a href="#contact" className="btn btn-secondary">
-            연락하기
-          </a>
-        </div>
-      </section>
+    <div className="relative min-h-[800px]">
+      <Spotlight />
 
-      <section className="skills">
-        <h2 className="section-title">기술 스택</h2>
-        <div className="skills-grid">
-          <div className="skill-card">
-            <h3>Frontend</h3>
-            <ul>
-              <li>React</li>
-              <li>Next.js</li>
-              <li>TypeScript</li>
-              <li>Tailwind CSS</li>
-            </ul>
+      <div className="mx-auto max-w-[1440px] px-6 py-12 font-sans md:px-12 md:py-20 lg:px-24 lg:py-0">
+        <div className="lg:flex lg:justify-between lg:gap-32 lg:min-h-[800px]">
+          {/* Left Section */}
+          <div
+            id="left-section"
+            className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:min-h-[800px] lg:w-[45%] lg:flex-col lg:gap-16 lg:pt-24 lg:pb-12"
+          >
+            <Header />
+            <AIChat />
           </div>
-          <div className="skill-card">
-            <h3>Backend</h3>
-            <ul>
-              <li>Node.js</li>
-              <li>Express</li>
-              <li>Python</li>
-              <li>PostgreSQL</li>
-            </ul>
-          </div>
-          <div className="skill-card">
-            <h3>Tools</h3>
-            <ul>
-              <li>Git</li>
-              <li>Docker</li>
-              <li>AWS</li>
-              <li>Vercel</li>
-            </ul>
-          </div>
-        </div>
-      </section>
 
-      <section id="contact" className="contact">
-        <h2 className="section-title">연락처</h2>
-        <div className="contact-info">
-          <p>이메일: developer@example.com</p>
-          <p>GitHub: github.com/username</p>
-          <p>LinkedIn: linkedin.com/in/username</p>
+          {/* Right Content */}
+          <main id="content" className="pt-24 lg:w-[55%] lg:pt-24 lg:pb-14">
+            <AboutSection />
+            <ExperienceSection />
+            <ArchiveSection />
+            <Footer />
+          </main>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

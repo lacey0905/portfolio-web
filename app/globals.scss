@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+// Variables
+$navy-500: #0f172a;
+$navy-900: #020a11;
+$slate-200: #e2e8f0;
+$slate-400: #94a3b8;
+$slate-600: #475569;
+$slate-700: #334155;
+$slate-800: #1e293b;
+$cyan-400: #5eead4;
+
+// Base Styles
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-navy-500 text-slate-400 antialiased;
+    font-family: "Inter", sans-serif;
+  }
+}
+
+// Utilities
+@layer utilities {
+  // Spotlight styles are now handled inline for better performance
+}
+
+// Navigation Styles
+.nav-indicator {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-text {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Social Links
+.social-links {
+  li {
+    a {
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: $slate-200;
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-10px);
+  }
+}
+
+.typing-dot {
+  animation: bounce 1.4s infinite;
+
+  &:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+}
+
+// Selection
+::selection {
+  @apply bg-cyan-400 text-navy-900;
+}
+
+::-moz-selection {
+  @apply bg-cyan-400 text-navy-900;
+}
+
+// Smooth Transitions
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Responsive Utilities
+@media (max-width: 768px) {
+  .mobile-hidden {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .desktop-sticky {
+    position: sticky;
+    top: 0;
+    display: flex;
+    max-height: 100vh;
+    width: 50%;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  .desktop-content {
+    width: 50%;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+// Custom Scrollbar (optional)
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $navy-500;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $slate-600;
+  border-radius: 5px;
+
+  &:hover {
+    background: $slate-400;
+  }
+}
+
+// Hidden Scrollbar for Chat Messages
+.chat-messages {
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE and Edge
+
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari, Opera
+  }
+
+  // List styles for better bullet positioning with leading-relaxed
+  ul,
+  ol {
+    list-style: none;
+    padding-left: 0;
+    margin: 0.75rem 0;
+
+    li {
+      position: relative;
+      padding-left: 1.5rem;
+
+      &::before {
+        position: absolute;
+        left: 0;
+        top: 0.5em; // Align with first line of text
+      }
+    }
+  }
+
+  ul {
+    li::before {
+      content: "•";
+      color: $slate-400;
+      font-weight: bold;
+    }
+  }
+
+  ol {
+    counter-reset: item;
+
+    li {
+      counter-increment: item;
+
+      &::before {
+        content: counter(item) ".";
+        color: $slate-400;
+        font-size: 0.875em;
+      }
+    }
+  }
+}

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import "./globals.css";
+import "./globals.scss";
 
 export const metadata: Metadata = {
   title: "포트폴리오",
@@ -13,27 +12,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
-      <body>
-        <nav className="navbar">
-          <div className="nav-container">
-            <Link href="/" className="nav-logo">
-              포트폴리오
-            </Link>
-            <div className="nav-menu">
-              <Link href="/" className="nav-link">
-                Home
-              </Link>
-              <Link href="/archive" className="nav-link">
-                Archive
-              </Link>
-            </div>
-          </div>
-        </nav>
-        <main className="main-content">{children}</main>
-        <footer className="footer">
-          <p>&copy; 2024 포트폴리오. All rights reserved.</p>
-        </footer>
+    <html lang="ko" className="scroll-smooth">
+      <body className="bg-navy-500 leading-relaxed text-slate-400 antialiased selection:bg-cyan-400 selection:text-navy-900">
+        {children}
       </body>
     </html>
   );
