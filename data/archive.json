@@ -1,0 +1,48 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "포트폴리오 웹사이트",
+      "description": "Next.js와 TypeScript를 사용한 개인 포트폴리오 웹사이트",
+      "technologies": ["Next.js", "TypeScript", "React", "Tailwind CSS"],
+      "image": "/images/portfolio.jpg",
+      "link": "https://portfolio.example.com",
+      "github": "https://github.com/username/portfolio",
+      "date": "2024-01-15",
+      "category": "Web Development"
+    },
+    {
+      "id": 2,
+      "title": "E-commerce 웹 애플리케이션",
+      "description": "React와 Node.js를 사용한 온라인 쇼핑몰 플랫폼",
+      "technologies": ["React", "Node.js", "Express", "MongoDB", "Stripe"],
+      "image": "/images/ecommerce.jpg",
+      "link": "https://ecommerce.example.com",
+      "github": "https://github.com/username/ecommerce",
+      "date": "2023-12-20",
+      "category": "Web Development"
+    },
+    {
+      "id": 3,
+      "title": "모바일 앱 개발",
+      "description": "React Native를 사용한 크로스 플랫폼 모바일 애플리케이션",
+      "technologies": ["React Native", "TypeScript", "Firebase", "Redux"],
+      "image": "/images/mobile-app.jpg",
+      "link": "https://play.google.com/store/apps/details?id=com.example.app",
+      "github": "https://github.com/username/mobile-app",
+      "date": "2023-11-10",
+      "category": "Mobile Development"
+    },
+    {
+      "id": 4,
+      "title": "데이터 분석 대시보드",
+      "description": "Python과 D3.js를 사용한 실시간 데이터 시각화 대시보드",
+      "technologies": ["Python", "D3.js", "Flask", "PostgreSQL", "Chart.js"],
+      "image": "/images/dashboard.jpg",
+      "link": "https://dashboard.example.com",
+      "github": "https://github.com/username/dashboard",
+      "date": "2023-10-05",
+      "category": "Data Science"
+    }
+  ]
+}
