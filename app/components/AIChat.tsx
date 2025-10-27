@@ -160,17 +160,6 @@ export default function AIChat() {
 
   return (
     <div className="mt-auto flex flex-1 flex-col lg:mt-auto lg:min-h-0 relative mb-6">
-      {/* Header */}
-      {/* <div className="mb-6 space-y-2">
-        <p className="text-sm font-medium text-slate-300">💬 AI 어시스턴트</p>
-        <p className="text-sm leading-relaxed text-slate-400">
-          김현균의 경력과 기술 스택을 기반으로 답변해드립니다. <br />
-          Gemini API를 활용하여 실시간으로 응답합니다.
-        </p>
-        <p className="text-xs text-slate-500">
-          예) "주요 기술 스택이 무엇인가요?", "어떤 프로젝트 경험이 있나요?"
-        </p>
-      </div> */}
       {/* Chat Container with Border */}
       <div className="flex flex-1 flex-col border border-slate-700/50 rounded-2xl px-6 pb-6 relative min-h-0">
         {/* Messages */}

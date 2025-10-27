@@ -1,6 +1,5 @@
 import Spotlight from "./components/Spotlight";
 import AIChat from "./components/AIChat";
-import Header from "./components/Header";
 import AboutSection from "./components/AboutSection";
 import ExperienceSection from "./components/ExperienceSection";
 import ArchiveSection from "./components/ArchiveSection";
@@ -16,15 +15,13 @@ export default function Home() {
           {/* Left Section */}
           <div
             id="left-section"
-            className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:min-h-[800px] lg:w-[45%] lg:flex-col lg:gap-14 lg:pt-16 lg:pb-12"
+            className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:min-h-[800px] lg:w-[45%] lg:flex-col lg:gap-14 lg:pt-10 lg:pb-12"
           >
-            {/* <Header /> */}
             <AIChat />
           </div>
 
           {/* Right Content */}
           <main id="content" className="pt-24 lg:w-[55%] lg:pb-14 lg:pt-16">
-            <Header />
             <AboutSection />
             <ExperienceSection />
             <ArchiveSection />
