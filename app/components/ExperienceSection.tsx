@@ -72,7 +72,7 @@ export default async function ExperienceSection() {
                         {project.description}
                       </p>
                       {project.responsibilities.length > 0 && (
-                        <ul className="mt-2 text-sm leading-normal text-slate-400 list-disc list-inside space-y-1">
+                        <ul className="mt-2 text-sm leading-normal text-slate-400 list-disc pl-5 space-y-1">
                           {project.responsibilities.map((resp, idx) => (
                             <li key={idx} className="leading-relaxed">
                               {resp}

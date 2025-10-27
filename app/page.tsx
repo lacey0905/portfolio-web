@@ -16,14 +16,15 @@ export default function Home() {
           {/* Left Section */}
           <div
             id="left-section"
-            className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:min-h-[800px] lg:w-[45%] lg:flex-col lg:gap-16 lg:pt-24 lg:pb-12"
+            className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:min-h-[800px] lg:w-[45%] lg:flex-col lg:gap-14 lg:pt-16 lg:pb-12"
           >
-            <Header />
+            {/* <Header /> */}
             <AIChat />
           </div>
 
           {/* Right Content */}
-          <main id="content" className="pt-24 lg:w-[55%] lg:pt-24 lg:pb-14">
+          <main id="content" className="pt-24 lg:w-[55%] lg:pb-14 lg:pt-16">
+            <Header />
             <AboutSection />
             <ExperienceSection />
             <ArchiveSection />

@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 export default function Spotlight() {
   const spotlightRef = useRef<HTMLDivElement>(null);
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
