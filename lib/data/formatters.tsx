@@ -61,7 +61,7 @@ export function highlightText(
           href={highlights[part]}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-medium text-slate-200 transition hover:text-teal-300"
+          className="font-medium text-slate-200 transition hover:text-[rgb(94,234,212)]"
         >
           {part}
         </a>

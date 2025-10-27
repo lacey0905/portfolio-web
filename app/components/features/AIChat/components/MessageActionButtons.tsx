@@ -15,7 +15,7 @@ export default function MessageActionButtons({
       {isLastMessage && !isFirstMessage && (
         <button
           onClick={onRegenerate}
-          className="p-1 rounded-md text-slate-500 hover:text-blue-400 hover:bg-slate-700/30 transition-colors"
+          className="p-1 rounded-md text-slate-500 hover:text-[rgb(94,234,212)] hover:bg-slate-700/30 transition-colors"
           title="재생성"
           disabled={isLoading}
         >
@@ -28,11 +28,11 @@ export default function MessageActionButtons({
       {/* Copy Button */}
       <button
         onClick={onCopy}
-        className="p-1 rounded-md text-slate-500 hover:text-blue-400 hover:bg-slate-700/30 transition-colors"
+        className="p-1 rounded-md text-slate-500 hover:text-[rgb(94,234,212)] hover:bg-slate-700/30 transition-colors"
         title="복사하기"
       >
         {isCopied ? (
-          <span className="material-symbols-outlined text-[14px] leading-none text-blue-400">
+          <span className="material-symbols-outlined text-[14px] leading-none text-[rgb(94,234,212)]">
             check
           </span>
         ) : (

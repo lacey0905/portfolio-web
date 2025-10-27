@@ -21,7 +21,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       {/* Content */}
       <div className="z-10 sm:col-span-6">
         <ProjectTitle title={project.title} link={project.link} />
-        <p className="mt-2 text-sm leading-normal text-slate-400">
+        <p className="mt-2 text-xs sm:text-sm leading-normal text-slate-400">
           {project.description}
         </p>
         <TechTagList tags={project.technologies} />

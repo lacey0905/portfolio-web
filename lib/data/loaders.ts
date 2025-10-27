@@ -126,6 +126,22 @@ export function getProjectsSync(): Project[] {
   return data?.projects || [];
 }
 
+/**
+ * Featured 프로젝트만 로드 (비동기)
+ */
+export async function getFeaturedProjects(): Promise<Project[]> {
+  const projects = await getProjects();
+  return projects.filter((project) => project.featured === true);
+}
+
+/**
+ * Featured 프로젝트만 로드 (동기)
+ */
+export function getFeaturedProjectsSync(): Project[] {
+  const projects = getProjectsSync();
+  return projects.filter((project) => project.featured === true);
+}
+
 // ============================================
 // 마크다운 파일 로더
 // ============================================

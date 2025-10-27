@@ -8,12 +8,12 @@ interface ArchiveTableProps {
 
 export default function ArchiveTable({ projects }: ArchiveTableProps) {
   return (
-    <div className="mt-12">
-      <table className="mt-12 w-full border-collapse text-left">
+    <div className="mt-8 sm:mt-10 md:mt-12">
+      <table className="mt-8 sm:mt-10 md:mt-12 w-full border-collapse text-left">
         <ArchiveTableHeader />
         <tbody>
           {projects.map((project) => (
-            <ArchiveTableRow key={project.id} project={project} />
+            <ArchiveTableRow key={project.title} project={project} />
           ))}
         </tbody>
       </table>

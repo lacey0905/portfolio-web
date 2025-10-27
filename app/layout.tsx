@@ -75,7 +75,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
       </head>
-      <body className="bg-navy-500 leading-relaxed text-slate-400 antialiased selection:bg-cyan-400 selection:text-navy-900">
+      <body className="bg-navy-500 leading-relaxed text-slate-400 antialiased selection:bg-[rgb(94,234,212)] selection:text-navy-900">
         {children}
       </body>
     </html>

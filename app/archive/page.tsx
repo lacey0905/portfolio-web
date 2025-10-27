@@ -12,7 +12,7 @@ export default function Archive() {
   return (
     <div className="relative min-h-screen">
       <Spotlight />
-      <div className="box-border bg-navy-500 min-h-screen px-4 py-8 md:px-8 md:py-12 lg:px-12 lg:py-16 max-w-[1280px] mx-auto">
+      <div className="box-border bg-navy-500 min-h-screen px-4 py-8 md:px-8 md:py-12 lg:px-12 lg:py-24 max-w-[1280px] mx-auto">
         <BackLink />
         <ArchiveHeader />
         <ArchiveTable projects={projects} />

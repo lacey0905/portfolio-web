@@ -78,6 +78,15 @@ $cyan-400: #5eead4;
   animation: fadeIn 0.3s ease-out;
 }
 
+@keyframes slideUpFromBottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
 @keyframes bounce {
   0%,
   60%,
@@ -103,11 +112,13 @@ $cyan-400: #5eead4;
 
 // Selection
 ::selection {
-  @apply bg-cyan-400 text-navy-900;
+  background: rgb(94, 234, 212);
+  color: #020a11;
 }
 
 ::-moz-selection {
-  @apply bg-cyan-400 text-navy-900;
+  background: rgb(94, 234, 212);
+  color: #020a11;
 }
 
 // Smooth Transitions
@@ -139,24 +150,6 @@ $cyan-400: #5eead4;
     width: 50%;
     padding-top: 6rem;
     padding-bottom: 6rem;
-  }
-}
-
-// Custom Scrollbar (optional)
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: $navy-500;
-}
-
-::-webkit-scrollbar-thumb {
-  background: $slate-600;
-  border-radius: 5px;
-
-  &:hover {
-    background: $slate-400;
   }
 }
 
@@ -257,11 +250,13 @@ $cyan-400: #5eead4;
 
   // Links
   a {
-    @apply text-blue-400 underline underline-offset-2;
+    color: rgb(94, 234, 212);
+    text-decoration: underline;
+    text-underline-offset: 2px;
     transition: color 0.2s ease;
 
     &:hover {
-      @apply text-blue-300;
+      color: rgba(94, 234, 212, 0.8);
     }
   }
 
@@ -284,7 +279,8 @@ $cyan-400: #5eead4;
 
   // Inline Code
   code {
-    @apply bg-slate-700/40 text-blue-300 px-1.5 py-0.5 rounded text-xs;
+    @apply bg-slate-700/40 px-1.5 py-0.5 rounded text-xs;
+    color: rgb(94, 234, 212);
     font-family: "Consolas", "Monaco", "Courier New", monospace;
   }
 

@@ -1,7 +1,6 @@
 {
   "projects": [
     {
-      "id": 1,
       "title": "Lies of P",
       "description": "게임 IP 공식 브랜드 웹사이트 설계 및 구축. 헤드리스 CMS 기반 콘텐츠 관리 시스템 구현",
       "technologies": ["TypeScript", "React", "Astro", "Strapi"],
@@ -10,10 +9,10 @@
       "github": "",
       "date": "2023",
       "category": "Web Development",
-      "company": "NEOWIZ"
+      "company": "Neowiz",
+      "featured": true
     },
     {
-      "id": 2,
       "title": "Browndust2",
       "description": "게임 런칭을 위한 풀스택 프로모션 웹사이트 개발. 티저/사전예약 페이지, 데스크톱 런처 UI, Firebase 기반 실시간 웹푸시 알림 시스템 구축",
       "technologies": ["TypeScript", "React", "Astro", "Strapi", "Firebase"],
@@ -22,7 +21,122 @@
       "github": "",
       "date": "2023",
       "category": "Web Development",
-      "company": "NEOWIZ"
+      "company": "Neowiz",
+      "featured": true
+    },
+    {
+      "title": "AVA Gate Main",
+      "description": "A.V.A 게임 메인 게이트 페이지. 패럴랙스 스크롤링과 다양한 배너를 포함한 메인 포털",
+      "technologies": ["HTML5", "CSS3", "JavaScript"],
+      "image": "",
+      "link": "https://pub-web-ivory.vercel.app/ava_gate_main/",
+      "github": "",
+      "date": "2021",
+      "category": "Web Development",
+      "company": "Neowiz Able",
+      "featured": false
+    },
+    {
+      "title": "AVA Great Wheel",
+      "description": "A.V.A 게임의 룰렛 이벤트 페이지. 인터랙티브한 룰렛 애니메이션과 보상 시스템 구현",
+      "technologies": ["HTML5", "CSS3", "JavaScript", "Animation"],
+      "image": "",
+      "link": "https://pub-web-ivory.vercel.app/ava_greatwheel/",
+      "github": "",
+      "date": "2021",
+      "category": "Web Development",
+      "company": "Neowiz Able",
+      "featured": false
+    },
+    {
+      "title": "AVA Global Steam",
+      "description": "A.V.A 글로벌 스팀 버전 프로모션 페이지. 커스텀 폰트와 반응형 디자인이 적용된 글로벌 사이트",
+      "technologies": [
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "Responsive",
+        "Custom Font"
+      ],
+      "image": "",
+      "link": "https://pub-web-ivory.vercel.app/ava_global_steam/",
+      "github": "",
+      "date": "2020",
+      "category": "Web Development",
+      "company": "Neowiz Able",
+      "featured": false
+    },
+    {
+      "title": "Rainbow Six Siege",
+      "description": "레인보우 식스 시즈 게임 프로모션 페이지. 비디오 백그라운드와 애니메이션 효과가 특징",
+      "technologies": ["HTML5", "CSS3", "JavaScript", "Video", "Animation"],
+      "image": "",
+      "link": "https://pub-web-ivory.vercel.app/rainbowsix_siege/",
+      "github": "",
+      "date": "2020",
+      "category": "Web Development",
+      "company": "Neowiz Able",
+      "featured": false
+    },
+    {
+      "title": "AVA Avangers",
+      "description": "A.V.A 게임 특별 이벤트 프로모션 페이지. 캐릭터 선택 및 미션 시스템, 일일 보상 시스템 구현",
+      "technologies": ["HTML5", "CSS3", "JavaScript"],
+      "image": "",
+      "link": "https://pub-web-ivory.vercel.app/ava_avangers/",
+      "github": "",
+      "date": "2019",
+      "category": "Web Development",
+      "company": "Neowiz Able",
+      "featured": false
+    },
+    {
+      "title": "Slugger Capsule",
+      "description": "슬러거 게임의 캡슐 시스템 페이지. 인터랙티브한 캡슐 오픈 애니메이션 구현",
+      "technologies": ["HTML5", "CSS3", "JavaScript", "Animation"],
+      "image": "",
+      "link": "https://pub-web-ivory.vercel.app/slugger_capsule/",
+      "github": "",
+      "date": "2019",
+      "category": "Web Development",
+      "company": "Neowiz Able",
+      "featured": false
+    },
+    {
+      "title": "Slugger Ground Flip",
+      "description": "슬러거 게임의 구장 뒤집기 이벤트 페이지. 인터랙티브한 카드 플립 효과 활용",
+      "technologies": ["HTML5", "CSS3", "JavaScript", "Flip Animation"],
+      "image": "",
+      "link": "https://pub-web-ivory.vercel.app/slugger_ground_flip/",
+      "github": "",
+      "date": "2019",
+      "category": "Web Development",
+      "company": "Neowiz Able",
+      "featured": false
+    },
+    {
+      "title": "Slugger S Package",
+      "description": "슬러거 게임의 스페셜 패키지 페이지. 비디오 애니메이션과 카드 오픈 효과 구현",
+      "technologies": ["HTML5", "CSS3", "JavaScript", "Video"],
+      "image": "",
+      "link": "https://pub-web-ivory.vercel.app/slugger_s_package/",
+      "github": "",
+      "date": "2019",
+      "category": "Web Development",
+      "company": "Neowiz Able",
+      "featured": false
+    },
+    {
+      "title": "Naver Webtoon MS",
+      "description": "네이버 웹툰 마이크로사이트. 스와이퍼 슬라이더를 활용한 완전 반응형 웹사이트",
+      "technologies": ["HTML5", "CSS3", "JavaScript", "Swiper", "Mobile First"],
+      "image": "",
+      "link": "https://pub-web-ivory.vercel.app/naver_webtoon_ms/",
+      "github": "",
+      "date": "2018",
+      "category": "Web Development",
+      "company": "Neowiz Able",
+      "featured": false
     }
   ]
 }

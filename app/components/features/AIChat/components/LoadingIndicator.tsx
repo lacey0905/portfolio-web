@@ -19,13 +19,13 @@ export default function LoadingIndicator() {
       </div>
       <div className="px-4 py-3">
         <div className="flex items-center gap-1">
-          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-blue-400/60"></span>
+          <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-[rgb(94,234,212)]/60"></span>
           <span
-            className="h-1.5 w-1.5 animate-bounce rounded-full bg-blue-400/60"
+            className="h-1.5 w-1.5 animate-bounce rounded-full bg-[rgb(94,234,212)]/60"
             style={{ animationDelay: "0.2s" }}
           ></span>
           <span
-            className="h-1.5 w-1.5 animate-bounce rounded-full bg-blue-400/60"
+            className="h-1.5 w-1.5 animate-bounce rounded-full bg-[rgb(94,234,212)]/60"
             style={{ animationDelay: "0.4s" }}
           ></span>
         </div>

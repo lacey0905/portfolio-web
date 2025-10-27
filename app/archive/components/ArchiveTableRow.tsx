@@ -14,7 +14,11 @@ export default function ArchiveTableRow({ project }: ArchiveTableRowProps) {
   return (
     <tr className="group border-b border-slate-300/10 last:border-none hover:bg-slate-800/50">
       <ProjectYearCell year={getYearFromDate(project.date)} />
-      <ProjectInfoCell title={project.title} />
+      <ProjectInfoCell
+        title={project.title}
+        link={project.link}
+        github={project.github}
+      />
       <MadeAtCell company={project.company} />
       <TechTagsCell technologies={project.technologies} />
       <ProjectLinksCell link={project.link} github={project.github} />

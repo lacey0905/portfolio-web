@@ -14,7 +14,7 @@ export default function ArchiveTableHeader() {
         <th className="hidden py-4 pr-8 text-sm font-semibold text-slate-200 lg:table-cell">
           Built with
         </th>
-        <th className="hidden w-52 py-4 pr-8 text-sm font-semibold text-slate-200 sm:table-cell">
+        <th className="hidden w-56 py-4 pr-8 text-sm font-semibold text-slate-200 sm:table-cell">
           Link
         </th>
       </tr>

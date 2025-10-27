@@ -12,7 +12,7 @@ export default function ChatInput({
       <form onSubmit={onSubmit}>
         <div
           onClick={() => inputRef.current?.focus()}
-          className="flex items-center gap-3 rounded-full border border-slate-700/50 bg-slate-800/90 backdrop-blur-sm pl-5 pr-3 py-2.5 shadow-lg transition-all focus-within:border-blue-400/50 focus-within:bg-slate-800/95 focus-within:shadow-xl focus-within:shadow-blue-400/10 cursor-text"
+          className="flex items-center gap-3 rounded-full border border-slate-700/50 bg-slate-800/90 backdrop-blur-sm pl-5 pr-3 py-2.5 shadow-lg transition-all focus-within:border-[rgb(94,234,212)]/50 focus-within:bg-slate-800/95 focus-within:shadow-xl focus-within:shadow-[rgb(94,234,212)]/10 cursor-text"
         >
           <span className="material-symbols-outlined text-[14px] leading-none text-slate-500">
             auto_awesome
@@ -29,7 +29,7 @@ export default function ChatInput({
           <button
             type="submit"
             disabled={isLoading || !value.trim()}
-            className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-blue-400 transition-all hover:bg-blue-500/20 disabled:cursor-not-allowed disabled:opacity-30"
+            className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[rgb(94,234,212)]/10 text-[rgb(94,234,212)] transition-all hover:bg-[rgb(94,234,212)]/20 disabled:cursor-not-allowed disabled:opacity-30"
           >
             <span className="material-symbols-outlined text-[22px] leading-none">
               send

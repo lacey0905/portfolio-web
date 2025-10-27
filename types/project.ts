@@ -1,5 +1,4 @@
 export interface Project {
-  id: number;
   title: string;
   description: string;
   technologies: string[];
@@ -9,4 +8,5 @@ export interface Project {
   date: string;
   category: string;
   company?: string;
+  featured?: boolean;
 }

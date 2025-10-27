@@ -1,6 +1,5 @@
 import { getProfile } from "@/lib/data/loaders";
 import { highlightText } from "@/lib/data/formatters";
-import SectionHeader from "@/app/components/ui/SectionHeader";
 
 export default async function AboutSection() {
   const profile = await getProfile();
@@ -12,25 +11,26 @@ export default async function AboutSection() {
   return (
     <section
       id="about"
-      className="mb-16 scroll-mt-16 md:mb-24 lg:mb-28 lg:scroll-mt-24"
+      className="mb-12 sm:mb-16 md:mb-20 lg:mb-28 scroll-mt-16 lg:scroll-mt-24"
       aria-label="About me"
     >
-      <SectionHeader title="About" />
-
       {/* Profile Header */}
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">
+      <header className="mb-6 sm:mb-8">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-200 sm:text-4xl md:text-5xl">
           {profile.nameEn}
         </h1>
-        <h2 className="mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl">
+        <h2 className="mt-2 sm:mt-3 text-base font-medium tracking-tight text-slate-200 sm:text-lg md:text-xl">
           {profile.role}
         </h2>
       </header>
 
       {/* About Content */}
-      <div className="mb-6 space-y-4">
+      <div className="mb-4 sm:mb-6 space-y-3 sm:space-y-4">
         {profile.about.paragraphs.map((paragraph, index) => (
-          <p key={index} className="text-[15px] leading-relaxed text-slate-400">
+          <p
+            key={index}
+            className="text-sm sm:text-[15px] leading-relaxed text-slate-400"
+          >
             {highlightText(paragraph, profile.about.highlights)}
           </p>
         ))}
@@ -40,7 +40,7 @@ export default async function AboutSection() {
       <ul className="flex items-center gap-5" aria-label="Social media">
         <li>
           <a
-            className="block text-slate-400 transition hover:text-teal-300"
+            className="block text-slate-400 transition hover:text-[rgb(94,234,212)]"
             href={profile.contact.github}
             target="_blank"
             rel="noreferrer"
@@ -59,7 +59,7 @@ export default async function AboutSection() {
         </li>
         <li>
           <a
-            className="block text-slate-400 transition hover:text-teal-300"
+            className="block text-slate-400 transition hover:text-[rgb(94,234,212)]"
             href={`mailto:${profile.contact.email}`}
             aria-label="Email"
           >
