@@ -2,10 +2,10 @@ export interface Profile {
   name: string;
   nameEn: string;
   role: string;
-  bio: string;
   birth: string;
   about: {
     paragraphs: string[];
+    highlights: Record<string, string>;
   };
   skills: {
     webDevelopment: string[];

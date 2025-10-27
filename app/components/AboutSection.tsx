@@ -1,11 +1,43 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { Profile } from "@/types/profile";
+import React from "react";
 
 async function getProfileData(): Promise<Profile> {
   const filePath = path.join(process.cwd(), "data", "profile.json");
   const fileContents = await fs.readFile(filePath, "utf8");
   return JSON.parse(fileContents);
+}
+
+function highlightText(
+  text: string,
+  highlights: Record<string, string>
+): React.ReactNode {
+  if (!highlights || Object.keys(highlights).length === 0) {
+    return text;
+  }
+
+  // 모든 키워드를 찾기 위한 정규식 생성
+  const keywords = Object.keys(highlights);
+  const pattern = new RegExp(`(${keywords.join("|")})`, "g");
+  const parts = text.split(pattern);
+
+  return parts.map((part, index) => {
+    if (highlights[part]) {
+      return (
+        <a
+          key={index}
+          href={highlights[part]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-slate-200 transition hover:text-teal-300"
+        >
+          {part}
+        </a>
+      );
+    }
+    return <React.Fragment key={index}>{part}</React.Fragment>;
+  });
 }
 
 export default async function AboutSection() {
@@ -14,7 +46,7 @@ export default async function AboutSection() {
   return (
     <section
       id="about"
-      className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+      className="mb-16 scroll-mt-16 md:mb-24 lg:mb-28 lg:scroll-mt-24"
       aria-label="About me"
     >
       {/* Sticky Section Header */}
@@ -26,24 +58,19 @@ export default async function AboutSection() {
 
       {/* Profile Header */}
       <header className="mb-8">
-        <div>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">
-            {profile.nameEn}
-          </h1>
-          <h2 className="mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl">
-            {profile.role}
-          </h2>
-        </div>
-
-        {/* Bio */}
-        <p className="mt-4 leading-normal text-slate-400">{profile.bio}</p>
+        <h1 className="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">
+          {profile.nameEn}
+        </h1>
+        <h2 className="mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl">
+          {profile.role}
+        </h2>
       </header>
 
       {/* About Content */}
       <div className="mb-6 space-y-4">
         {profile.about.paragraphs.map((paragraph, index) => (
           <p key={index} className="text-[15px] leading-relaxed text-slate-400">
-            {paragraph}
+            {highlightText(paragraph, profile.about.highlights)}
           </p>
         ))}
       </div>
@@ -52,7 +79,7 @@ export default async function AboutSection() {
       <ul className="flex items-center gap-5" aria-label="Social media">
         <li>
           <a
-            className="block text-slate-400 transition hover:text-emerald-400"
+            className="block text-slate-400 transition hover:text-teal-300"
             href={profile.contact.github}
             target="_blank"
             rel="noreferrer"
@@ -71,7 +98,7 @@ export default async function AboutSection() {
         </li>
         <li>
           <a
-            className="block text-slate-400 transition hover:text-emerald-400"
+            className="block text-slate-400 transition hover:text-teal-300"
             href={`mailto:${profile.contact.email}`}
             aria-label="Email"
           >

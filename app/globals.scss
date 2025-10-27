@@ -24,6 +24,13 @@ $cyan-400: #5eead4;
     @apply bg-navy-500 text-slate-400 antialiased;
     font-family: "Inter", sans-serif;
   }
+
+  // Material Symbols
+  .material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 20;
+    user-select: none;
+    vertical-align: middle;
+  }
 }
 
 // Utilities
