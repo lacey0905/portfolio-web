@@ -1,47 +1,13 @@
-import { promises as fs } from "fs";
-import path from "path";
-import { Profile } from "@/types/profile";
-import React from "react";
-
-async function getProfileData(): Promise<Profile> {
-  const filePath = path.join(process.cwd(), "data", "profile.json");
-  const fileContents = await fs.readFile(filePath, "utf8");
-  return JSON.parse(fileContents);
-}
-
-function highlightText(
-  text: string,
-  highlights: Record<string, string>
-): React.ReactNode {
-  if (!highlights || Object.keys(highlights).length === 0) {
-    return text;
-  }
-
-  // 모든 키워드를 찾기 위한 정규식 생성
-  const keywords = Object.keys(highlights);
-  const pattern = new RegExp(`(${keywords.join("|")})`, "g");
-  const parts = text.split(pattern);
-
-  return parts.map((part, index) => {
-    if (highlights[part]) {
-      return (
-        <a
-          key={index}
-          href={highlights[part]}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-medium text-slate-200 transition hover:text-teal-300"
-        >
-          {part}
-        </a>
-      );
-    }
-    return <React.Fragment key={index}>{part}</React.Fragment>;
-  });
-}
+import { getProfile } from "@/lib/data/loaders";
+import { highlightText } from "@/lib/data/formatters";
+import SectionHeader from "@/app/components/ui/SectionHeader";
 
 export default async function AboutSection() {
-  const profile = await getProfileData();
+  const profile = await getProfile();
+
+  if (!profile) {
+    return null;
+  }
 
   return (
     <section
@@ -49,12 +15,7 @@ export default async function AboutSection() {
       className="mb-16 scroll-mt-16 md:mb-24 lg:mb-28 lg:scroll-mt-24"
       aria-label="About me"
     >
-      {/* Sticky Section Header */}
-      <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-navy-500/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
-        <h2 className="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">
-          About
-        </h2>
-      </div>
+      <SectionHeader title="About" />
 
       {/* Profile Header */}
       <header className="mb-8">

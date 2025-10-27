@@ -8,4 +8,5 @@ export interface Project {
   github?: string;
   date: string;
   category: string;
+  company?: string;
 }

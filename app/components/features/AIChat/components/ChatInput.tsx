@@ -1,0 +1,46 @@
+import type { ChatInputProps } from "../types";
+
+export default function ChatInput({
+  value,
+  isLoading,
+  onChange,
+  onSubmit,
+  inputRef,
+}: ChatInputProps) {
+  return (
+    <div className="absolute -bottom-10 left-0 right-0">
+      <form onSubmit={onSubmit}>
+        <div
+          onClick={() => inputRef.current?.focus()}
+          className="flex items-center gap-3 rounded-full border border-slate-700/50 bg-slate-800/90 backdrop-blur-sm pl-5 pr-3 py-2.5 shadow-lg transition-all focus-within:border-blue-400/50 focus-within:bg-slate-800/95 focus-within:shadow-xl focus-within:shadow-blue-400/10 cursor-text"
+        >
+          <span className="material-symbols-outlined text-[14px] leading-none text-slate-500">
+            auto_awesome
+          </span>
+          <input
+            ref={inputRef}
+            type="text"
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder="궁금한 것을 질문해 보세요"
+            disabled={isLoading}
+            className="flex-1 bg-transparent text-sm text-slate-200 placeholder-slate-400 outline-none disabled:opacity-50"
+          />
+          <button
+            type="submit"
+            disabled={isLoading || !value.trim()}
+            className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-blue-500/10 text-blue-400 transition-all hover:bg-blue-500/20 disabled:cursor-not-allowed disabled:opacity-30"
+          >
+            <span className="material-symbols-outlined text-[22px] leading-none">
+              send
+            </span>
+          </button>
+        </div>
+      </form>
+      <p className="mt-2 text-center text-xs text-slate-500/80">
+        AI가 생성한 답변은 부정확할 수 있습니다. 중요한 정보는 반드시
+        재확인하세요.
+      </p>
+    </div>
+  );
+}

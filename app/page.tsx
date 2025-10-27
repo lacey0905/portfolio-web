@@ -1,9 +1,9 @@
-import Spotlight from "./components/Spotlight";
-import AIChat from "./components/AIChat";
-import AboutSection from "./components/AboutSection";
-import ExperienceSection from "./components/ExperienceSection";
-import ArchiveSection from "./components/ArchiveSection";
-import Footer from "./components/Footer";
+import Spotlight from "./components/ui/Spotlight";
+import AIChat from "./components/features/AIChat";
+import AboutSection from "./components/sections/AboutSection";
+import ExperienceSection from "./components/sections/ExperienceSection";
+import ArchiveSection from "./components/sections/ArchiveSection";
+import Footer from "./components/sections/Footer";
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
           {/* Left Section */}
           <div
             id="left-section"
-            className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:min-h-[800px] lg:w-[45%] lg:flex-col lg:gap-14 lg:pt-10 lg:pb-12"
+            className="lg:sticky lg:top-0 lg:flex lg:h-screen lg:min-h-[800px] lg:w-[45%] lg:flex-col lg:gap-14 lg:pt-12 lg:pb-12"
           >
             <AIChat />
           </div>
