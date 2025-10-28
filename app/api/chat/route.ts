@@ -17,8 +17,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { message, dataSources = ["profile", "myStory"] } =
-      await request.json();
+    const {
+      message,
+      dataSources = ["profile", "experience", "archive", "resume", "myStory"],
+    } = await request.json();
 
     // 메시지 유효성 검증
     if (!message) {
