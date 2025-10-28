@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, ReactNode } from "react";
+import { useEffect, ReactNode, useState } from "react";
 
 interface ChatPopupProps {
   isOpen: boolean;
@@ -13,6 +13,8 @@ export default function ChatPopup({
   onClose,
   children,
 }: ChatPopupProps) {
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+
   // ESC 키로 닫기
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -34,6 +36,32 @@ export default function ChatPopup({
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [isOpen, onClose]);
+
+  // iOS 키보드 감지 (visualViewport API)
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleViewportResize = () => {
+      if (window.visualViewport) {
+        const viewportHeight = window.visualViewport.height;
+        const windowHeight = window.innerHeight;
+        const diff = windowHeight - viewportHeight;
+        setKeyboardHeight(diff > 0 ? diff : 0);
+      }
+    };
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", handleViewportResize);
+      handleViewportResize();
+    }
+
+    return () => {
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener("resize", handleViewportResize);
+      }
+      setKeyboardHeight(0);
+    };
+  }, [isOpen]);
 
   // 스크롤 방지
   useEffect(() => {
@@ -64,13 +92,21 @@ export default function ChatPopup({
         className="fixed inset-x-0 z-50 xl:hidden"
         style={{
           animation: "slideUpFromBottom 0.3s ease-out",
-          bottom: "var(--safe-area-inset-bottom)",
+          bottom: keyboardHeight > 0 ? `${keyboardHeight}px` : "var(--safe-area-inset-bottom)",
+          transition: "bottom 0.2s ease-out",
         }}
         role="dialog"
         aria-modal="true"
         aria-label="AI 채팅"
       >
-        <div className="relative h-[75vh] max-h-[700px] w-full rounded-t-3xl bg-slate-900/30 backdrop-blur-2xl shadow-2xl overflow-hidden border-t-2 border-x-2 border-[rgb(94,234,212)]/60 border-b-0">
+        <div
+          className="relative w-full rounded-t-3xl bg-slate-900/30 backdrop-blur-2xl shadow-2xl overflow-hidden border-t-2 border-x-2 border-[rgb(94,234,212)]/60 border-b-0"
+          style={{
+            height: keyboardHeight > 0 ? `calc(75vh - ${keyboardHeight}px)` : "75vh",
+            maxHeight: keyboardHeight > 0 ? "none" : "700px",
+            transition: "height 0.2s ease-out",
+          }}
+        >
           {/* Glassmorphism overlay with stronger gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-slate-800/20 via-slate-800/10 to-transparent pointer-events-none" />
 
