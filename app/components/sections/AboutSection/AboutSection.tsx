@@ -40,7 +40,7 @@ export default async function AboutSection() {
       <ul className="flex items-center gap-5" aria-label="Social media">
         <li>
           <a
-            className="block text-slate-400 transition hover:text-[rgb(94,234,212)]"
+            className="block text-slate-400 transition hover:text-[rgb(94,234,212)] active:text-[rgb(94,234,212)] active:scale-95"
             href={profile.contact.github}
             target="_blank"
             rel="noreferrer"
@@ -59,7 +59,7 @@ export default async function AboutSection() {
         </li>
         <li>
           <a
-            className="block text-slate-400 transition hover:text-[rgb(94,234,212)]"
+            className="block text-slate-400 transition hover:text-[rgb(94,234,212)] active:text-[rgb(94,234,212)] active:scale-95"
             href={`mailto:${profile.contact.email}`}
             aria-label="Email"
           >

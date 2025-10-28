@@ -14,7 +14,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
       <div className="absolute -inset-x-4 -inset-y-4 z-0 hidden rounded-md transition motion-reduce:transition-none lg:-inset-x-6 lg:block lg:group-hover:bg-slate-800/50 lg:group-hover:shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] lg:group-hover:drop-shadow-lg"></div>
 
       {/* Date Header */}
-      <header className="z-10 mb-2 mt-1 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">
+      <header className="z-10 mb-2 mt-1 text-xs sm:text-sm font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2">
         {formatDateRange(experience.startDate, experience.endDate)}
       </header>
 
@@ -23,7 +23,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
         {/* Company/Position Header */}
         <h3 className="font-medium leading-snug text-slate-200">
           <div>
-            <span className="inline-flex items-baseline font-medium leading-tight text-slate-200 text-sm sm:text-base transition group-hover:text-[rgb(94,234,212)]">
+            <span className="inline-flex items-baseline font-medium leading-tight text-slate-200 text-sm sm:text-base transition lg:group-hover:text-[rgb(94,234,212)]">
               {experience.position} · {experience.company}
             </span>
           </div>

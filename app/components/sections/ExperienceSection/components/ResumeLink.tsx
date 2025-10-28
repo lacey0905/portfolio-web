@@ -15,11 +15,11 @@ export default function ResumeLink({ href = "/resume.pdf" }: ResumeLinkProps) {
         rel="noreferrer"
       >
         <span>
-          <span className="border-b border-transparent pb-px transition group-hover:border-[rgb(94,234,212)] motion-reduce:transition-none">
+          <span className="border-b border-transparent pb-px transition group-hover:border-[rgb(94,234,212)] group-active:border-[rgb(94,234,212)] motion-reduce:transition-none">
             View Full{" "}
           </span>
           <span className="whitespace-nowrap">
-            <span className="border-b border-transparent pb-px transition group-hover:border-[rgb(94,234,212)] motion-reduce:transition-none">
+            <span className="border-b border-transparent pb-px transition group-hover:border-[rgb(94,234,212)] group-active:border-[rgb(94,234,212)] motion-reduce:transition-none">
               Résumé
             </span>
             <ArrowRightIcon />

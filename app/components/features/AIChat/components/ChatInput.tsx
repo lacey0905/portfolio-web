@@ -25,9 +25,9 @@ function ChatInput({
       <form onSubmit={onSubmit}>
         <div
           onClick={() => inputRef.current?.focus()}
-          className="flex items-center gap-3 rounded-full border border-slate-700/50 bg-slate-800/90 backdrop-blur-sm pl-5 pr-3 py-2.5 shadow-lg transition-all focus-within:border-[rgb(94,234,212)]/50 focus-within:bg-slate-800/95 focus-within:shadow-xl focus-within:shadow-[rgb(94,234,212)]/10 cursor-text"
+          className="flex items-center gap-2 sm:gap-3 rounded-full border border-slate-700/50 bg-slate-800/90 backdrop-blur-sm pl-4 pr-2 py-2 sm:pl-5 sm:pr-3 sm:py-2.5 shadow-lg transition-all focus-within:border-[rgb(94,234,212)]/50 focus-within:bg-slate-800/95 focus-within:shadow-xl focus-within:shadow-[rgb(94,234,212)]/10 cursor-text"
         >
-          <span className="material-symbols-outlined text-[14px] leading-none text-slate-500">
+          <span className="material-symbols-outlined text-[16px] sm:text-[18px] leading-none text-slate-500">
             auto_awesome
           </span>
           <input
@@ -45,9 +45,9 @@ function ChatInput({
             type="submit"
             disabled={isLoading || !value.trim()}
             aria-label="메시지 전송"
-            className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[rgb(94,234,212)]/10 text-[rgb(94,234,212)] transition-all hover:bg-[rgb(94,234,212)]/20 disabled:cursor-not-allowed disabled:opacity-30"
+            className="flex h-8 w-8 sm:h-9 sm:w-9 flex-shrink-0 items-center justify-center rounded-full bg-[rgb(94,234,212)]/10 text-[rgb(94,234,212)] transition-all hover:bg-[rgb(94,234,212)]/20 active:bg-[rgb(94,234,212)]/30 active:scale-95 disabled:cursor-not-allowed disabled:opacity-30"
           >
-            <span className="material-symbols-outlined text-[22px] leading-none">
+            <span className="material-symbols-outlined text-[20px] sm:text-[22px] leading-none">
               send
             </span>
           </button>

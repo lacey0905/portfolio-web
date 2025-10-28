@@ -7,7 +7,7 @@ export interface ProjectImageProps {
 
 export default function ProjectImage({ src, alt }: ProjectImageProps) {
   return (
-    <div className="relative aspect-video w-full overflow-hidden rounded border-2 border-slate-200/10 transition group-hover:border-slate-200/30">
+    <div className="relative aspect-video w-full overflow-hidden rounded border-2 border-slate-200/10 transition lg:group-hover:border-slate-200/30">
       {src ? (
         <Image src={src} alt={alt} fill className="object-cover" />
       ) : (

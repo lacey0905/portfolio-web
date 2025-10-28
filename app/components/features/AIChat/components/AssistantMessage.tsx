@@ -24,7 +24,7 @@ function AssistantMessage({
   return (
     <>
       <div className="flex items-center gap-3">
-        <div className="relative h-8 w-8 flex-shrink-0 overflow-hidden rounded-full">
+        <div className="relative h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0 overflow-hidden rounded-full">
           <Image
             src="/KIM-HYOUN_GYOUN.jpg"
             alt={profile.name}
@@ -32,12 +32,12 @@ function AssistantMessage({
             className="object-cover"
           />
         </div>
-        <span className="text-sm font-medium text-slate-300">
+        <span className="text-sm sm:text-base font-medium text-slate-300">
           {profile.name}
         </span>
       </div>
       <div className="relative">
-        <div className="markdown-content rounded-2xl bg-white/5 px-6 py-5 text-sm leading-relaxed text-slate-300">
+        <div className="markdown-content rounded-2xl bg-white/5 px-4 py-4 sm:px-6 sm:py-5 text-sm sm:text-base leading-relaxed text-slate-300">
           <ReactMarkdown
             remarkPlugins={remarkPlugins}
             rehypePlugins={rehypePlugins}
