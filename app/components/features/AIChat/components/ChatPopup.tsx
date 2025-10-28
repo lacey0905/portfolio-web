@@ -94,6 +94,41 @@ export default function ChatPopup({
     };
   }, [isOpen]);
 
+  // 키보드가 열렸을 때 모든 스크롤 완전 차단
+  useEffect(() => {
+    if (keyboardHeight <= 0) return;
+
+    const preventScroll = (e: Event) => {
+      e.preventDefault();
+      e.stopPropagation();
+    };
+
+    const preventWheel = (e: WheelEvent) => {
+      e.preventDefault();
+    };
+
+    const preventTouch = (e: TouchEvent) => {
+      e.preventDefault();
+    };
+
+    // 모든 스크롤 이벤트 차단
+    window.addEventListener("scroll", preventScroll, { passive: false });
+    window.addEventListener("wheel", preventWheel, { passive: false });
+    window.addEventListener("touchmove", preventTouch, { passive: false });
+    document.addEventListener("scroll", preventScroll, { passive: false });
+    document.addEventListener("wheel", preventWheel, { passive: false });
+    document.addEventListener("touchmove", preventTouch, { passive: false });
+
+    return () => {
+      window.removeEventListener("scroll", preventScroll);
+      window.removeEventListener("wheel", preventWheel);
+      window.removeEventListener("touchmove", preventTouch);
+      document.removeEventListener("scroll", preventScroll);
+      document.removeEventListener("wheel", preventWheel);
+      document.removeEventListener("touchmove", preventTouch);
+    };
+  }, [keyboardHeight]);
+
   if (!isOpen) return null;
 
   return (
