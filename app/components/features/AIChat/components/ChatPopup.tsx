@@ -67,22 +67,30 @@ export default function ChatPopup({
   useEffect(() => {
     if (!isOpen) return;
 
-    const preventDefault = (e: TouchEvent) => {
-      // 채팅 팝업 내부가 아닌 경우에만 스크롤 방지
-      const target = e.target as HTMLElement;
-      const chatPopup = document.querySelector('[role="dialog"]');
-      if (chatPopup && !chatPopup.contains(target)) {
-        e.preventDefault();
-      }
-    };
+    // 현재 스크롤 위치 저장
+    const scrollY = window.scrollY;
+    const body = document.body;
+    const html = document.documentElement;
 
-    // 터치 이벤트로 스크롤 방지 (iOS 대응)
-    document.addEventListener("touchmove", preventDefault, { passive: false });
-    document.body.style.overflow = "hidden";
+    // body를 고정하여 스크롤 완전 차단
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.overflow = "hidden";
+    html.style.overflow = "hidden";
 
     return () => {
-      document.removeEventListener("touchmove", preventDefault);
-      document.body.style.overflow = "";
+      // 스타일 제거
+      body.style.position = "";
+      body.style.top = "";
+      body.style.left = "";
+      body.style.right = "";
+      body.style.overflow = "";
+      html.style.overflow = "";
+
+      // 스크롤 위치 복원
+      window.scrollTo(0, scrollY);
     };
   }, [isOpen]);
 
@@ -94,7 +102,11 @@ export default function ChatPopup({
       <div
         className="fixed inset-0 z-40 bg-black/30 backdrop-blur-md xl:hidden"
         onClick={onClose}
-        style={{ animation: "fadeIn 0.3s ease-out" }}
+        onTouchMove={(e) => e.preventDefault()}
+        style={{
+          animation: "fadeIn 0.3s ease-out",
+          touchAction: "none"
+        }}
         aria-hidden="true"
       />
 
