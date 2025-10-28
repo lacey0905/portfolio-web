@@ -41,7 +41,7 @@ export const metadata: Metadata = {
       "네오위즈에서 HTML5 웹 게임과 마케팅 웹사이트를 개발하는 프론트엔드 엔지니어입니다.",
     images: [
       {
-        url: "/KIM-HYOUN_GYOUN.jpg",
+        url: "/og.png",
         width: 1200,
         height: 630,
         alt: "김현균 포트폴리오",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     title: "김현균 | Frontend Engineer",
     description:
       "네오위즈에서 HTML5 웹 게임과 마케팅 웹사이트를 개발하는 프론트엔드 엔지니어입니다.",
-    images: ["/KIM-HYOUN_GYOUN.jpg"],
+    images: ["/og.png"],
     creator: "@lacey0905",
   },
   verification: {
