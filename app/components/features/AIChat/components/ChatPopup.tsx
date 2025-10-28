@@ -65,21 +65,25 @@ export default function ChatPopup({
 
   // 스크롤 방지 (iOS 대응)
   useEffect(() => {
-    if (isOpen) {
-      const scrollY = window.scrollY;
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = "100%";
-      document.body.style.overflow = "hidden";
+    if (!isOpen) return;
 
-      return () => {
-        document.body.style.position = "";
-        document.body.style.top = "";
-        document.body.style.width = "";
-        document.body.style.overflow = "";
-        window.scrollTo(0, scrollY);
-      };
-    }
+    const preventDefault = (e: TouchEvent) => {
+      // 채팅 팝업 내부가 아닌 경우에만 스크롤 방지
+      const target = e.target as HTMLElement;
+      const chatPopup = document.querySelector('[role="dialog"]');
+      if (chatPopup && !chatPopup.contains(target)) {
+        e.preventDefault();
+      }
+    };
+
+    // 터치 이벤트로 스크롤 방지 (iOS 대응)
+    document.addEventListener("touchmove", preventDefault, { passive: false });
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("touchmove", preventDefault);
+      document.body.style.overflow = "";
+    };
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -96,24 +100,17 @@ export default function ChatPopup({
 
       {/* Popup - 하단에서 올라오는 디자인 */}
       <div
-        className="fixed inset-x-0 z-50 xl:hidden"
+        className="fixed inset-x-0 bottom-0 z-50 xl:hidden"
         style={{
           animation: "slideUpFromBottom 0.3s ease-out",
-          bottom: keyboardHeight > 0 ? `${keyboardHeight}px` : "var(--safe-area-inset-bottom)",
-          transition: "bottom 0.2s ease-out",
+          paddingBottom: keyboardHeight > 0 ? `${keyboardHeight}px` : "var(--safe-area-inset-bottom)",
+          transition: "padding-bottom 0.2s ease-out",
         }}
         role="dialog"
         aria-modal="true"
         aria-label="AI 채팅"
       >
-        <div
-          className="relative w-full rounded-t-3xl bg-slate-900/30 backdrop-blur-2xl shadow-2xl overflow-hidden border-t-2 border-x-2 border-[rgb(94,234,212)]/60 border-b-0"
-          style={{
-            height: keyboardHeight > 0 ? `calc(75vh - ${keyboardHeight}px)` : "75vh",
-            maxHeight: keyboardHeight > 0 ? "none" : "700px",
-            transition: "height 0.2s ease-out",
-          }}
-        >
+        <div className="relative h-[75vh] max-h-[700px] w-full rounded-t-3xl bg-slate-900/30 backdrop-blur-2xl shadow-2xl overflow-hidden border-t-2 border-x-2 border-[rgb(94,234,212)]/60 border-b-0">
           {/* Glassmorphism overlay with stronger gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-slate-800/20 via-slate-800/10 to-transparent pointer-events-none" />
 
