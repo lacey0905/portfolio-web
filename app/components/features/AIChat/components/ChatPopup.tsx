@@ -61,8 +61,11 @@ export default function ChatPopup({
 
       {/* Popup - 하단에서 올라오는 디자인 */}
       <div
-        className="fixed inset-x-0 bottom-0 z-50 xl:hidden"
-        style={{ animation: "slideUpFromBottom 0.3s ease-out" }}
+        className="fixed inset-x-0 z-50 xl:hidden"
+        style={{
+          animation: "slideUpFromBottom 0.3s ease-out",
+          bottom: "var(--safe-area-inset-bottom)",
+        }}
         role="dialog"
         aria-modal="true"
         aria-label="AI 채팅"
@@ -75,7 +78,12 @@ export default function ChatPopup({
           <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgb(94,234,212)]/30 to-transparent pointer-events-none" />
 
           {/* Chat Content */}
-          <div className="relative h-full px-3 py-4 sm:p-4">
+          <div
+            className="relative h-full px-3 py-4 sm:p-4"
+            style={{
+              paddingBottom: "calc(1rem + var(--safe-area-inset-bottom))",
+            }}
+          >
             <div className="h-full [&>div]:!mb-0 [&>div]:h-full">
               {children}
             </div>

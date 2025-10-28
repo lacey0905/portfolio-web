@@ -12,7 +12,10 @@ export default function FloatingChatButton({
   return (
     <button
       onClick={onClick}
-      className="fixed bottom-6 right-6 z-[60] flex h-14 w-14 items-center justify-center rounded-full bg-[rgb(94,234,212)] text-navy-900 shadow-lg transition-all hover:scale-110 hover:shadow-xl xl:hidden"
+      className="fixed right-6 z-[60] flex h-14 w-14 items-center justify-center rounded-full bg-[rgb(94,234,212)] text-navy-900 shadow-lg transition-all hover:scale-110 hover:shadow-xl xl:hidden"
+      style={{
+        bottom: "calc(1.5rem + var(--safe-area-inset-bottom))",
+      }}
       aria-label="AI 채팅 열기"
       aria-expanded="false"
       type="button"

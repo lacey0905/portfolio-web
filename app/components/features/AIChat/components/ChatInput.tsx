@@ -39,7 +39,7 @@ function ChatInput({
             placeholder="궁금한 것을 질문해 보세요"
             disabled={isLoading}
             enterKeyHint="send"
-            className="flex-1 bg-transparent text-sm text-slate-200 placeholder-slate-400 outline-none disabled:opacity-50"
+            className="flex-1 bg-transparent text-base text-slate-200 placeholder-slate-400 outline-none disabled:opacity-50"
           />
           <button
             type="submit"
@@ -54,8 +54,8 @@ function ChatInput({
         </div>
       </form>
       <p className="mt-2 text-center text-xs text-slate-500/80">
-        AI가 생성한 답변은 부정확할 수 있습니다. 중요한 정보는 반드시
-        재확인하세요.
+        <span className="inline-block">AI가 생성한 답변은 부정확할 수 있습니다.</span>{" "}
+        <span className="inline-block">중요한 정보는 반드시 재확인하세요.</span>
       </p>
     </div>
   );
