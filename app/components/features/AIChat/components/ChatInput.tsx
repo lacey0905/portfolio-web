@@ -1,14 +1,27 @@
+import { memo } from "react";
 import type { ChatInputProps } from "../types";
 
-export default function ChatInput({
+function ChatInput({
   value,
   isLoading,
   onChange,
   onSubmit,
   inputRef,
 }: ChatInputProps) {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      if (!isLoading && value.trim()) {
+        const form = e.currentTarget.form;
+        if (form) {
+          onSubmit(e as any);
+        }
+      }
+    }
+  };
+
   return (
-    <div className="absolute -bottom-10 left-0 right-0">
+    <div className="absolute bottom-0 left-0 right-0 xl:bottom-5 xl:left-5 xl:right-5">
       <form onSubmit={onSubmit}>
         <div
           onClick={() => inputRef.current?.focus()}
@@ -22,13 +35,16 @@ export default function ChatInput({
             type="text"
             value={value}
             onChange={(e) => onChange(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder="궁금한 것을 질문해 보세요"
             disabled={isLoading}
+            enterKeyHint="send"
             className="flex-1 bg-transparent text-sm text-slate-200 placeholder-slate-400 outline-none disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={isLoading || !value.trim()}
+            aria-label="메시지 전송"
             className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[rgb(94,234,212)]/10 text-[rgb(94,234,212)] transition-all hover:bg-[rgb(94,234,212)]/20 disabled:cursor-not-allowed disabled:opacity-30"
           >
             <span className="material-symbols-outlined text-[22px] leading-none">
@@ -44,3 +60,6 @@ export default function ChatInput({
     </div>
   );
 }
+
+// 메모이제이션
+export default memo(ChatInput);

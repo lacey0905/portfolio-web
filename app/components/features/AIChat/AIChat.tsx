@@ -21,9 +21,9 @@ export default function AIChat() {
   } = useChatMessages();
 
   return (
-    <div className="mt-auto flex flex-1 flex-col lg:mt-auto lg:min-h-0 relative mb-6">
+    <div className="mt-auto flex flex-1 flex-col lg:mt-auto lg:min-h-0 relative ">
       {/* Chat Container with Border */}
-      <div className="flex flex-1 flex-col border border-slate-700/50 rounded-2xl px-6 pb-6 relative min-h-0">
+      <div className="flex flex-1 flex-col xl:bg-white/5 rounded-2xl px-1 xl:px-6 relative min-h-0">
         {/* Messages */}
         <MessageList
           messages={messages}

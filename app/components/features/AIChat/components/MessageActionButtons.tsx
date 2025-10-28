@@ -17,7 +17,9 @@ export default function MessageActionButtons({
           onClick={onRegenerate}
           className="p-1 rounded-md text-slate-500 hover:text-[rgb(94,234,212)] hover:bg-slate-700/30 transition-colors"
           title="재생성"
+          aria-label="답변 재생성"
           disabled={isLoading}
+          type="button"
         >
           <span className="material-symbols-outlined text-[14px] leading-none">
             refresh
@@ -30,6 +32,8 @@ export default function MessageActionButtons({
         onClick={onCopy}
         className="p-1 rounded-md text-slate-500 hover:text-[rgb(94,234,212)] hover:bg-slate-700/30 transition-colors"
         title="복사하기"
+        aria-label={isCopied ? "복사됨" : "메시지 복사"}
+        type="button"
       >
         {isCopied ? (
           <span className="material-symbols-outlined text-[14px] leading-none text-[rgb(94,234,212)]">

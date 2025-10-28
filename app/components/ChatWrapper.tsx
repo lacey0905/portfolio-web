@@ -1,12 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import AIChat from "./features/AIChat";
 import FloatingChatButton from "./features/AIChat/components/FloatingChatButton";
 import ChatPopup from "./features/AIChat/components/ChatPopup";
 
 export default function ChatWrapper() {
   const [isChatOpen, setIsChatOpen] = useState(false);
+
+  const handleOpenChat = useCallback(() => {
+    setIsChatOpen(true);
+  }, []);
+
+  const handleCloseChat = useCallback(() => {
+    setIsChatOpen(false);
+  }, []);
 
   return (
     <>
@@ -19,13 +27,10 @@ export default function ChatWrapper() {
       </div>
 
       {/* Floating Chat Button - 1280px 미만에서만 표시 */}
-      <FloatingChatButton
-        isOpen={isChatOpen}
-        onClick={() => setIsChatOpen(true)}
-      />
+      <FloatingChatButton isOpen={isChatOpen} onClick={handleOpenChat} />
 
       {/* Chat Popup */}
-      <ChatPopup isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+      <ChatPopup isOpen={isChatOpen} onClose={handleCloseChat} />
     </>
   );
 }

@@ -2,9 +2,21 @@ import { NextRequest, NextResponse } from "next/server";
 import { getProfileSync } from "@/lib/data/loaders";
 import { generateSystemPrompt, generatePromptSections } from "@/lib/ai/prompts";
 import { generateChatResponse, validateApiKey } from "@/lib/ai/gemini";
+import { validateEnv } from "@/lib/env";
 
 export async function POST(request: NextRequest) {
   try {
+    // 환경 변수 검증
+    try {
+      validateEnv();
+    } catch (envError) {
+      console.error("Environment validation failed:", envError);
+      return NextResponse.json(
+        { error: "서버 설정 오류입니다. 관리자에게 문의하세요." },
+        { status: 500 }
+      );
+    }
+
     const { message, dataSources = ["profile", "myStory"] } =
       await request.json();
 

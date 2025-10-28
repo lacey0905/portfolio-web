@@ -1,6 +1,7 @@
+import { memo } from "react";
 import type { UserMessageProps } from "../types";
 
-export default function UserMessage({ content }: UserMessageProps) {
+function UserMessage({ content }: UserMessageProps) {
   return (
     <>
       <div className="flex items-center gap-3">
@@ -13,9 +14,12 @@ export default function UserMessage({ content }: UserMessageProps) {
           You (Recruiter)
         </span>
       </div>
-      <div className="rounded-2xl bg-slate-800/40 px-4 py-2.5 text-sm leading-relaxed text-slate-200 whitespace-pre-wrap">
+      <div className="rounded-2xl bg-white/5 px-4 py-2.5 text-sm leading-relaxed text-slate-200 whitespace-pre-wrap">
         {content}
       </div>
     </>
   );
 }
+
+// 메모이제이션으로 불필요한 리렌더링 방지
+export default memo(UserMessage);

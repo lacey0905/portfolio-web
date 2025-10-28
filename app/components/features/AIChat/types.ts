@@ -5,6 +5,7 @@
 export interface Message {
   role: "user" | "assistant";
   content: string;
+  id?: string; // 고유 ID 추가 (옵셔널)
 }
 
 export interface ChatInputProps {

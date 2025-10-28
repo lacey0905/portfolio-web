@@ -175,15 +175,25 @@ export function getMyStorySync(): string | null {
 }
 
 /**
+ * 채팅 메시지 초기 데이터 타입
+ */
+interface ChatMessagesData {
+  initialMessage: {
+    role: "assistant" | "user";
+    content: string;
+  };
+}
+
+/**
  * 챗 메시지 데이터 로드 (비동기)
  */
-export async function getChatMessages(): Promise<any | null> {
-  return loadJsonAsync("chat-messages.json");
+export async function getChatMessages(): Promise<ChatMessagesData | null> {
+  return loadJsonAsync<ChatMessagesData>("chat-messages.json");
 }
 
 /**
  * 챗 메시지 데이터 로드 (동기)
  */
-export function getChatMessagesSync(): any | null {
-  return loadJsonSync("chat-messages.json");
+export function getChatMessagesSync(): ChatMessagesData | null {
+  return loadJsonSync<ChatMessagesData>("chat-messages.json");
 }
