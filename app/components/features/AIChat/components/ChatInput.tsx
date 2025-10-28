@@ -53,8 +53,10 @@ function ChatInput({
           </button>
         </div>
       </form>
-      <p className="mt-2 text-center text-xs text-slate-500/80">
-        <span className="inline-block">AI가 생성한 답변은 부정확할 수 있습니다.</span>{" "}
+      <p className="mt-2 text-center text-xs text-slate-500/80 px-2">
+        <span className="inline-block">
+          AI가 생성한 답변은 부정확할 수 있습니다.
+        </span>{" "}
         <span className="inline-block">중요한 정보는 반드시 재확인하세요.</span>
       </p>
     </div>
