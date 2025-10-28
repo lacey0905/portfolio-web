@@ -56,11 +56,16 @@ export async function POST(request: NextRequest) {
     const responseText = await generateChatResponse(systemPrompt, message);
 
     return NextResponse.json({ message: responseText });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error in chat API:", error);
+
+    // 사용자 친화적 에러 메시지
+    const errorMessage =
+      error.message || "AI 응답 생성 중 오류가 발생했습니다.";
+
     return NextResponse.json(
-      { error: "AI 응답 생성 중 오류가 발생했습니다." },
-      { status: 500 }
+      { error: errorMessage },
+      { status: error.status || 500 }
     );
   }
 }

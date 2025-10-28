@@ -1,25 +1,39 @@
 "use client";
 
-import { useChatMessages } from "./hooks/useChatMessages";
 import MessageList from "./components/MessageList";
 import ChatInput from "./components/ChatInput";
 import "highlight.js/styles/github-dark.css";
+import type { Message } from "./types";
 
-export default function AIChat() {
-  const {
-    messages,
-    input,
-    isLoading,
-    copiedIndex,
-    messagesEndRef,
-    messagesContainerRef,
-    inputRef,
-    handleSubmit,
-    handleCopy,
-    handleRegenerate,
-    setInput,
-  } = useChatMessages();
+interface AIChatProps {
+  messages: Message[];
+  input: string;
+  isLoading: boolean;
+  copiedIndex: number | null;
+  messagesEndRef: React.RefObject<HTMLDivElement | null>;
+  messagesContainerRef: React.RefObject<HTMLDivElement | null>;
+  inputRef: React.RefObject<HTMLInputElement | null>;
+  handleSubmit: (e: React.FormEvent) => void;
+  handleCopy: (content: string, index: number) => void;
+  handleRegenerate: (index: number) => void;
+  setInput: (value: string) => void;
+  scrollToBottom: () => void;
+}
 
+export default function AIChat({
+  messages,
+  input,
+  isLoading,
+  copiedIndex,
+  messagesEndRef,
+  messagesContainerRef,
+  inputRef,
+  handleSubmit,
+  handleCopy,
+  handleRegenerate,
+  setInput,
+  scrollToBottom,
+}: AIChatProps) {
   return (
     <div className="mt-auto flex flex-1 flex-col lg:mt-auto lg:min-h-0 relative ">
       {/* Chat Container with Border */}

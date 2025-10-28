@@ -1,14 +1,18 @@
 "use client";
 
-import { useEffect } from "react";
-import AIChat from "../AIChat";
+import { useEffect, ReactNode } from "react";
 
 interface ChatPopupProps {
   isOpen: boolean;
   onClose: () => void;
+  children: ReactNode;
 }
 
-export default function ChatPopup({ isOpen, onClose }: ChatPopupProps) {
+export default function ChatPopup({
+  isOpen,
+  onClose,
+  children,
+}: ChatPopupProps) {
   // ESC 키로 닫기
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -73,7 +77,7 @@ export default function ChatPopup({ isOpen, onClose }: ChatPopupProps) {
           {/* Chat Content */}
           <div className="relative h-full px-3 py-4 sm:p-4">
             <div className="h-full [&>div]:!mb-0 [&>div]:h-full">
-              <AIChat />
+              {children}
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import profile from "@/data/profile.json";
 
 export default function LoadingIndicator() {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 pb-12">
       <div className="flex items-center gap-3">
         <div className="relative h-8 w-8 flex-shrink-0 overflow-hidden rounded-full">
           <Image

@@ -38,7 +38,12 @@ export function useChatMessages() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, scrollToBottom]);
+
+  // 초기 마운트 시에도 스크롤
+  useEffect(() => {
+    scrollToBottom();
+  }, [scrollToBottom]);
 
   // 로딩 완료 시 포커스 복원
   useEffect(() => {
@@ -191,5 +196,6 @@ export function useChatMessages() {
     handleCopy,
     handleRegenerate,
     setInput,
+    scrollToBottom,
   };
 }
