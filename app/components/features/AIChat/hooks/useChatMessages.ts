@@ -84,6 +84,15 @@ export function useChatMessages() {
       setIsLoading(true);
 
       try {
+        // 재생성 시점까지의 히스토리 전달 (초기 메시지 제외)
+        const historyUpToIndex = messages
+          .slice(0, index)
+          .filter(
+            (m) =>
+              m.role !== "assistant" ||
+              m.content !== chatMessages.initialMessage.content
+          );
+
         const response = await fetch("/api/chat", {
           method: "POST",
           headers: {
@@ -92,6 +101,7 @@ export function useChatMessages() {
           body: JSON.stringify({
             message: lastUserMessage.content,
             dataSources: ALL_DATA_SOURCES,
+            history: historyUpToIndex,
           }),
         });
 
@@ -138,6 +148,11 @@ export function useChatMessages() {
           body: JSON.stringify({
             message: userMessage,
             dataSources: ALL_DATA_SOURCES,
+            history: messages.filter(
+              (m) =>
+                m.role !== "assistant" ||
+                m.content !== chatMessages.initialMessage.content
+            ),
           }),
         });
 

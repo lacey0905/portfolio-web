@@ -9,10 +9,12 @@ export const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 /**
  * Gemini 채팅 응답 생성 (v1 + 지원 모델 사용)
  * - system prompt는 history 첫 메시지로 전달
+ * - 이전 대화 히스토리를 포함하여 컨텍스트 유지
  */
 export async function generateChatResponse(
   systemPrompt: string,
-  userMessage: string
+  userMessage: string,
+  chatHistory: Array<{ role: string; content: string }> = []
 ): Promise<string> {
   try {
     // ✅ v1에서 확실히 되는 모델로 교체 (예: "gemini-2.5-flash")
@@ -23,13 +25,21 @@ export async function generateChatResponse(
     );
 
     // ✅ systemInstruction 대신 history로 시스템 규칙 전달
+    // 이전 대화 내역을 Gemini 형식으로 변환
+    const geminiHistory = [
+      {
+        role: "user",
+        parts: [{ text: `SYSTEM: ${systemPrompt}` }],
+      },
+      // 기존 대화 히스토리 추가
+      ...chatHistory.map((msg) => ({
+        role: msg.role === "user" ? "user" : "model",
+        parts: [{ text: msg.content }],
+      })),
+    ];
+
     const chat = model.startChat({
-      history: [
-        {
-          role: "user",
-          parts: [{ text: `SYSTEM: ${systemPrompt}` }],
-        },
-      ],
+      history: geminiHistory,
     });
 
     const result = await chat.sendMessage(userMessage);

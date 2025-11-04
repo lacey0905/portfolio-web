@@ -20,6 +20,7 @@ export async function POST(request: NextRequest) {
     const {
       message,
       dataSources = ["profile", "experience", "archive", "resume", "myStory"],
+      history = [],
     } = await request.json();
 
     // 메시지 유효성 검증
@@ -54,8 +55,12 @@ export async function POST(request: NextRequest) {
     // 시스템 프롬프트 생성
     const systemPrompt = generateSystemPrompt(name, promptSections);
 
-    // AI 응답 생성
-    const responseText = await generateChatResponse(systemPrompt, message);
+    // AI 응답 생성 (전체 대화 히스토리 포함)
+    const responseText = await generateChatResponse(
+      systemPrompt,
+      message,
+      history
+    );
 
     return NextResponse.json({ message: responseText });
   } catch (error: any) {
