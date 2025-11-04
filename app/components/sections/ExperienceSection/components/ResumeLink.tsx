@@ -20,7 +20,7 @@ export default function ResumeLink({ href = "/resume.pdf" }: ResumeLinkProps) {
           </span>
           <span className="whitespace-nowrap">
             <span className="border-b border-transparent pb-px transition group-hover:border-[rgb(94,234,212)] group-active:border-[rgb(94,234,212)] motion-reduce:transition-none">
-              Résumé
+              Resume
             </span>
             <ArrowRightIcon />
           </span>
