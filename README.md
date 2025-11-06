@@ -149,7 +149,7 @@ portfolio-web/
 │   ├── archive/
 │   │   ├── browndust2.jpg
 │   │   └── lies_of_p.jpg
-│   ├── KIM-HYEON_GYOUN.jpg
+│   ├── KIM-HYEON-GYOUN.jpg
 │   └── resume.pdf
 ├── types/                            # TypeScript 타입 정의
 │   ├── experience.ts

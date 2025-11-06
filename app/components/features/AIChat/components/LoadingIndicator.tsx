@@ -7,7 +7,7 @@ export default function LoadingIndicator() {
       <div className="flex items-center gap-3">
         <div className="relative h-7 w-7 sm:h-8 sm:w-8 flex-shrink-0 overflow-hidden rounded-full">
           <Image
-            src="/KIM-HYEON_GYOUN.jpg"
+            src="/KIM-HYEON-GYOUN.jpg"
             alt={profile.name}
             fill
             className="object-cover"
