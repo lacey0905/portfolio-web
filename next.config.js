@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // App Router is stable in Next.js 15, no experimental flag needed
+  // Next.js 16에서는 Turbopack이 기본으로 활성화됨
+  // 빈 설정으로 webpack 경고 해결
+  turbopack: {},
 
   // 이미지 최적화
   images: {
@@ -9,7 +11,7 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
-  // 웹팩 번들 최적화
+  // 웹팩 번들 최적화 (webpack 모드에서만 사용됨)
   webpack: (config, { isServer }) => {
     if (!isServer) {
       // highlight.js를 별도 청크로 분리
