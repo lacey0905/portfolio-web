@@ -22,6 +22,11 @@ export const metadata: Metadata = {
   authors: [{ name: "김현균", url: "https://github.com/lacey0905" }],
   creator: "김현균",
   publisher: "김현균",
+  icons: {
+    icon: [{ url: "/KIM-HYEON-GYOUN.jpg", type: "image/jpeg" }],
+    apple: [{ url: "/KIM-HYEON-GYOUN.jpg", type: "image/jpeg" }],
+    shortcut: "/KIM-HYEON-GYOUN.jpg",
+  },
   robots: {
     index: true,
     follow: true,
