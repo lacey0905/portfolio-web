@@ -1,59 +1,107 @@
 // lib/ai/gemini.ts
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import {
+  getApiVersion,
+  invalidateChatModelCache,
+  resolveChatModel,
+} from "./models";
 
 /**
  * Gemini API 인스턴스
  */
 export const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
+type ChatHistory = Array<{ role: string; content: string }>;
+
+export interface ChatResponse {
+  text: string;
+  /** 실제 응답을 생성한 모델 (폴백·재시도가 일어났다면 그 결과) */
+  model: string;
+}
+
 /**
- * Gemini 채팅 응답 생성 (v1 + 지원 모델 사용)
- * - system prompt는 history 첫 메시지로 전달
+ * 지정한 모델로 1회 호출
+ * - system prompt는 history 첫 메시지로 전달 (v1의 systemInstruction 미지원 대응)
  * - 이전 대화 히스토리를 포함하여 컨텍스트 유지
+ */
+async function callModel(
+  modelId: string,
+  systemPrompt: string,
+  userMessage: string,
+  chatHistory: ChatHistory
+): Promise<string> {
+  const model = genAI.getGenerativeModel(
+    { model: modelId },
+    { apiVersion: getApiVersion() }
+  );
+
+  const geminiHistory = [
+    {
+      role: "user",
+      parts: [{ text: `SYSTEM: ${systemPrompt}` }],
+    },
+    ...chatHistory.map((msg) => ({
+      role: msg.role === "user" ? "user" : "model",
+      parts: [{ text: msg.content }],
+    })),
+  ];
+
+  const chat = model.startChat({ history: geminiHistory });
+  const result = await chat.sendMessage(userMessage);
+  return result.response.text();
+}
+
+/**
+ * Gemini 채팅 응답 생성
+ * 사용할 모델은 API 키가 지원하는 목록에서 자동으로 선택된다.
  */
 export async function generateChatResponse(
   systemPrompt: string,
   userMessage: string,
-  chatHistory: Array<{ role: string; content: string }> = []
-): Promise<string> {
+  chatHistory: ChatHistory = []
+): Promise<ChatResponse> {
+  const modelId = await resolveChatModel();
+
   try {
-    // ✅ v1에서 확실히 되는 모델로 교체 (예: "gemini-2.5-flash")
-    //    필요하면 "gemini-2.0-flash-001" 등 v1 목록에서 고르면 됨.
-    const model = genAI.getGenerativeModel(
-      { model: "gemini-2.5-flash" },
-      { apiVersion: "v1" } // ← 중요: v1beta 말고 v1을 강제
+    const text = await callModel(
+      modelId,
+      systemPrompt,
+      userMessage,
+      chatHistory
     );
-
-    // ✅ systemInstruction 대신 history로 시스템 규칙 전달
-    // 이전 대화 내역을 Gemini 형식으로 변환
-    const geminiHistory = [
-      {
-        role: "user",
-        parts: [{ text: `SYSTEM: ${systemPrompt}` }],
-      },
-      // 기존 대화 히스토리 추가
-      ...chatHistory.map((msg) => ({
-        role: msg.role === "user" ? "user" : "model",
-        parts: [{ text: msg.content }],
-      })),
-    ];
-
-    const chat = model.startChat({
-      history: geminiHistory,
-    });
-
-    const result = await chat.sendMessage(userMessage);
-    return result.response.text();
+    return { text, model: modelId };
   } catch (error: any) {
+    // 캐시해둔 모델이 사라진 경우, 목록을 다시 조회해 한 번만 재시도
+    if (error?.status === 404) {
+      invalidateChatModelCache();
+      const retryModelId = await resolveChatModel();
+
+      if (retryModelId !== modelId) {
+        console.warn(`[gemini] ${modelId} 사용 불가, ${retryModelId}로 재시도`);
+        const text = await callModel(
+          retryModelId,
+          systemPrompt,
+          userMessage,
+          chatHistory
+        );
+        return { text, model: retryModelId };
+      }
+    }
+
     // 공통 에러 핸들링
     if (error?.status === 429) {
       throw new Error(
         "API 요청 한도를 초과했습니다. 잠시 후 다시 시도해주세요."
       );
     }
+    if (error?.status === 503) {
+      throw new Error(
+        "AI 서버가 혼잡합니다. 잠시 후 다시 시도해주세요."
+      );
+    }
     if (error?.status === 404) {
       throw new Error(
-        "요청한 모델/버전 조합을 찾을 수 없습니다. 모델명을 v1에서 지원되는 것으로 변경해주세요."
+        "사용 가능한 모델을 찾을 수 없습니다. API 키 권한을 확인해주세요."
       );
     }
     if (error?.status === 400) {

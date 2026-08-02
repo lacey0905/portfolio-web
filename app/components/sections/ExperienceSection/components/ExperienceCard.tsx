@@ -1,5 +1,5 @@
 import type { Experience } from "@/types/experience";
-import { getAllTags } from "@/lib/data/formatters";
+import { getAllTags, formatDateRange } from "@/lib/data/formatters";
 import TechTagList from "@/app/components/ui/TechTagList";
 import ProjectItem from "./ProjectItem";
 
@@ -15,7 +15,7 @@ export default function ExperienceCard({ experience }: ExperienceCardProps) {
 
       {/* Date Header */}
       <header className="z-10 mb-2 mt-1 text-xs font-semibold uppercase tracking-wide text-slate-500 sm:col-span-2 whitespace-nowrap">
-        {experience.startDate} — {experience.endDate || "Present"}
+        {formatDateRange(experience.startDate, experience.endDate)}
       </header>
 
       {/* Content */}

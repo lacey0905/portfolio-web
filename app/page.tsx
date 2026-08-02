@@ -1,5 +1,6 @@
 import Spotlight from "./components/ui/Spotlight";
 import AboutSection from "./components/sections/AboutSection";
+import SkillsSection from "./components/sections/SkillsSection";
 import ExperienceSection from "./components/sections/ExperienceSection";
 import ArchiveSection from "./components/sections/ArchiveSection";
 import Footer from "./components/sections/Footer";
@@ -20,6 +21,7 @@ export default function Home() {
             <AboutSection />
             <ExperienceSection />
             <ArchiveSection />
+            <SkillsSection />
             <Footer />
           </main>
         </div>

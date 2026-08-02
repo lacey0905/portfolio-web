@@ -1,8 +1,26 @@
 {
   "projects": [
     {
+      "title": "AI Chat Portfolio",
+      "description": "Gemini API로 경력 데이터를 학습시킨 대화형 AI 채팅을 직접 구현. 채용공고를 붙여넣으면 적합도를 분석해 답변",
+      "technologies": [
+        "TypeScript",
+        "Next.js",
+        "React",
+        "Gemini API",
+        "Tailwind CSS"
+      ],
+      "image": "",
+      "link": "https://portfolio-web-vert-gamma.vercel.app/",
+      "github": "",
+      "date": "2026",
+      "category": "Web Development",
+      "company": "Personal",
+      "featured": false
+    },
+    {
       "title": "HTML5 Game : Genie's Mansion",
-      "description": "HTML5 게임 개발",
+      "description": "WebGL·Pixi.js 기반 실시간 인터랙티브 웹 애플리케이션. 렌더링 루프와 상태 관리 구조를 설계하고 React UI와 연동",
       "technologies": ["TypeScript", "React", "pixi.js", "WebGL"],
       "image": "/archive/genies_mansion.png",
       "link": "https://web-game-dist.vercel.app/",
@@ -14,7 +32,7 @@
     },
     {
       "title": "Lies of P",
-      "description": "게임 IP 공식 브랜드 웹사이트 설계 및 구축. 헤드리스 CMS 기반 콘텐츠 관리 시스템 구현",
+      "description": "Headless CMS 기반 브랜드 웹사이트 설계 및 구축. 다국어 콘텐츠 구조를 정리하고 Astro 정적 생성으로 SEO와 로딩 성능 확보",
       "technologies": ["TypeScript", "React", "Astro", "Strapi"],
       "image": "/archive/lies_of_p.jpg",
       "link": "https://www.liesofp.com/",
@@ -26,7 +44,7 @@
     },
     {
       "title": "Browndust2",
-      "description": "게임 런칭을 위한 풀스택 프로모션 웹사이트 개발. 티저/사전예약 페이지, 데스크톱 런처 UI, Firebase 기반 실시간 웹푸시 알림 시스템 구축",
+      "description": "티저·사전예약·런칭까지 단계별로 확장한 프로모션 웹. Firebase 실시간 웹푸시 알림, 데스크톱 런처 UI, Headless CMS 연동 구현",
       "technologies": ["TypeScript", "React", "Astro", "Strapi", "Firebase"],
       "image": "/archive/browndust2.jpg",
       "link": "https://browndust2.com/",
@@ -38,7 +56,7 @@
     },
     {
       "title": "AVA Gate Main",
-      "description": "A.V.A 게임 메인 게이트 페이지. 패럴랙스 스크롤링과 다양한 배너를 포함한 메인 포털",
+      "description": "패럴랙스 스크롤을 적용한 포털 메인 페이지. 다수 배너 영역을 운영자가 교체할 수 있는 구조로 구성",
       "technologies": ["HTML5", "CSS3", "JavaScript"],
       "image": "",
       "link": "https://pub-web-ivory.vercel.app/ava_gate_main/",
@@ -50,7 +68,7 @@
     },
     {
       "title": "AVA Great Wheel",
-      "description": "A.V.A 게임의 룰렛 이벤트 페이지. 인터랙티브한 룰렛 애니메이션과 보상 시스템 구현",
+      "description": "인터랙티브 룰렛 UI. 애니메이션 타이밍 제어와 결과 표시 로직 구현",
       "technologies": ["HTML5", "CSS3", "JavaScript", "Animation"],
       "image": "",
       "link": "https://pub-web-ivory.vercel.app/ava_greatwheel/",
@@ -62,7 +80,7 @@
     },
     {
       "title": "AVA Global Steam",
-      "description": "A.V.A 글로벌 스팀 버전 프로모션 페이지. 커스텀 폰트와 반응형 디자인이 적용된 글로벌 사이트",
+      "description": "글로벌 프로모션 페이지. 커스텀 폰트 적용과 반응형 레이아웃으로 다양한 해상도 대응",
       "technologies": [
         "HTML5",
         "CSS3",
@@ -80,7 +98,7 @@
     },
     {
       "title": "Rainbow Six Siege",
-      "description": "레인보우 식스 시즈 게임 프로모션 페이지. 비디오 백그라운드와 애니메이션 효과가 특징",
+      "description": "비디오 배경과 스크롤 연동 애니메이션을 활용한 프로모션 페이지",
       "technologies": ["HTML5", "CSS3", "JavaScript", "Video", "Animation"],
       "image": "",
       "link": "https://pub-web-ivory.vercel.app/rainbowsix_siege/",
@@ -92,7 +110,7 @@
     },
     {
       "title": "AVA Avangers",
-      "description": "A.V.A 게임 특별 이벤트 프로모션 페이지. 캐릭터 선택 및 미션 시스템, 일일 보상 시스템 구현",
+      "description": "선택·미션·일일 보상 흐름을 담은 인터랙티브 이벤트 페이지. 사용자 상태에 따른 화면 분기 처리",
       "technologies": ["HTML5", "CSS3", "JavaScript"],
       "image": "",
       "link": "https://pub-web-ivory.vercel.app/ava_avangers/",
@@ -104,7 +122,7 @@
     },
     {
       "title": "Slugger Capsule",
-      "description": "슬러거 게임의 캡슐 시스템 페이지. 인터랙티브한 캡슐 오픈 애니메이션 구현",
+      "description": "순차 애니메이션으로 결과를 연출하는 인터랙션 페이지",
       "technologies": ["HTML5", "CSS3", "JavaScript", "Animation"],
       "image": "",
       "link": "https://pub-web-ivory.vercel.app/slugger_capsule/",
@@ -116,7 +134,7 @@
     },
     {
       "title": "Slugger Ground Flip",
-      "description": "슬러거 게임의 구장 뒤집기 이벤트 페이지. 인터랙티브한 카드 플립 효과 활용",
+      "description": "카드 플립 인터랙션을 활용한 참여형 이벤트 페이지",
       "technologies": ["HTML5", "CSS3", "JavaScript", "Flip Animation"],
       "image": "",
       "link": "https://pub-web-ivory.vercel.app/slugger_ground_flip/",
@@ -128,7 +146,7 @@
     },
     {
       "title": "Slugger S Package",
-      "description": "슬러거 게임의 스페셜 패키지 페이지. 비디오 애니메이션과 카드 오픈 효과 구현",
+      "description": "비디오 연출과 카드 오픈 인터랙션을 결합한 상품 소개 페이지",
       "technologies": ["HTML5", "CSS3", "JavaScript", "Video"],
       "image": "",
       "link": "https://pub-web-ivory.vercel.app/slugger_s_package/",
@@ -140,7 +158,7 @@
     },
     {
       "title": "Naver Webtoon MS",
-      "description": "네이버 웹툰 마이크로사이트. 스와이퍼 슬라이더를 활용한 완전 반응형 웹사이트",
+      "description": "네이버 웹툰 마이크로사이트. Swiper 기반 슬라이더와 모바일 우선 반응형 레이아웃 구현",
       "technologies": ["HTML5", "CSS3", "JavaScript", "Swiper", "Mobile First"],
       "image": "",
       "link": "https://pub-web-ivory.vercel.app/naver_webtoon_ms/",

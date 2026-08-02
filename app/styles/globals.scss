@@ -173,6 +173,10 @@ $cyan-400: #5eead4;
 
 // Markdown Styles for Chat
 .markdown-content {
+  // 긴 URL·식별자가 말풍선 밖으로 삐져나가지 않도록
+  min-width: 0;
+  overflow-wrap: break-word;
+
   // Headings
   h1,
   h2,
@@ -198,6 +202,11 @@ $cyan-400: #5eead4;
   }
   h3 {
     @apply text-base;
+  }
+  h4,
+  h5,
+  h6 {
+    @apply text-sm text-slate-300;
   }
 
   // Paragraphs
@@ -231,6 +240,21 @@ $cyan-400: #5eead4;
         left: 0;
         top: 0.5em;
       }
+
+      // 항목 사이에 빈 줄이 있는 리스트는 p로 감싸지므로 여백을 상쇄한다
+      > p {
+        margin: 0;
+
+        + p {
+          margin-top: 0.5em;
+        }
+      }
+
+      // 중첩 리스트는 바깥 항목에 붙여 계층이 드러나게 한다
+      > ul,
+      > ol {
+        margin: 0.35em 0 0;
+      }
     }
   }
 
@@ -239,6 +263,16 @@ $cyan-400: #5eead4;
       content: "•";
       color: $slate-400;
       font-weight: bold;
+    }
+
+    // 깊이별로 마커를 구분
+    ul li::before {
+      content: "◦";
+    }
+
+    ul ul li::before {
+      content: "▪";
+      font-size: 0.75em;
     }
   }
 
@@ -252,6 +286,50 @@ $cyan-400: #5eead4;
         content: counter(item) ".";
         color: $slate-400;
         font-size: 0.875em;
+      }
+    }
+  }
+
+  // Task Lists (GFM 체크박스)
+  ul.contains-task-list {
+    li.task-list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding-left: 0;
+
+      &::before {
+        content: none;
+      }
+
+      input[type="checkbox"] {
+        appearance: none;
+        flex-shrink: 0;
+        position: relative;
+        width: 1rem;
+        height: 1rem;
+        margin-top: 0.35em;
+        border: 1px solid $slate-600;
+        border-radius: 0.25rem;
+        background: rgba(2, 10, 17, 0.5);
+
+        &:checked {
+          border-color: rgba(94, 234, 212, 0.5);
+          background: rgba(94, 234, 212, 0.12);
+
+          // 체크 표시
+          &::after {
+            content: "";
+            position: absolute;
+            left: 4.5px;
+            top: 1px;
+            width: 4px;
+            height: 8px;
+            border: solid rgb(94, 234, 212);
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+          }
+        }
       }
     }
   }
@@ -273,15 +351,22 @@ $cyan-400: #5eead4;
     @apply bg-slate-900/50 border border-slate-700/30 rounded-lg;
     margin: 1em 0;
     padding: 1em;
+    max-width: 100%;
     overflow-x: auto;
 
     code {
       @apply text-slate-300 text-xs;
+      display: block;
+      width: max-content;
+      min-width: 100%;
       background: transparent;
       padding: 0;
       border-radius: 0;
       font-family: "Consolas", "Monaco", "Courier New", monospace;
       line-height: 1.6;
+      // 코드는 줄바꿈 대신 가로 스크롤로 보여준다
+      overflow-wrap: normal;
+      white-space: pre;
     }
   }
 
@@ -295,6 +380,7 @@ $cyan-400: #5eead4;
   // Blockquotes (경력 정보 박스용)
   blockquote {
     @apply bg-slate-800/50 border border-slate-700/50 rounded px-4 py-3 my-3;
+    border-left: 2px solid rgba(94, 234, 212, 0.45);
     font-style: normal;
     line-height: 1.7;
 
@@ -338,16 +424,38 @@ $cyan-400: #5eead4;
   }
 
   // Tables
+  // 좁은 채팅 폭에서는 표를 줄이는 대신 가로로 스크롤한다
+  .markdown-table {
+    @apply border border-slate-700 rounded-lg;
+    margin: 1em 0;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   table {
-    @apply border-collapse w-full my-4;
+    @apply border-collapse w-full;
+    margin: 0;
+    font-size: 0.9em;
+    // 칸이 뭉개지지 않도록 내용 폭을 유지하고 넘치면 스크롤
+    min-width: max-content;
 
     th,
     td {
-      @apply border border-slate-700 px-3 py-2 text-left;
+      @apply border-slate-700 px-3 py-2 text-left align-top;
+      border-width: 0 0 1px 1px;
+
+      &:first-child {
+        border-left-width: 0;
+      }
+    }
+
+    tr:last-child td {
+      border-bottom-width: 0;
     }
 
     th {
-      @apply bg-slate-800/50 text-slate-200 font-semibold;
+      @apply bg-slate-800/50 text-slate-200 font-semibold whitespace-nowrap;
     }
 
     td {
@@ -355,14 +463,27 @@ $cyan-400: #5eead4;
     }
   }
 
-  // Strong/Bold
+  // Images
+  img {
+    @apply rounded-lg my-3;
+    max-width: 100%;
+    height: auto;
+  }
+
+  // Strong/Bold — 본문(slate-300)과 확실히 구분
   strong {
-    @apply text-slate-200 font-semibold;
+    @apply text-slate-100 font-bold;
   }
 
   // Emphasis/Italic
   em {
     @apply text-slate-300;
     font-style: italic;
+  }
+
+  // Strikethrough (GFM)
+  del {
+    @apply text-slate-500;
+    text-decoration-color: rgba(148, 163, 184, 0.5);
   }
 }

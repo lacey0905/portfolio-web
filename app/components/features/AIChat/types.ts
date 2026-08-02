@@ -11,9 +11,15 @@ export interface Message {
 export interface ChatInputProps {
   value: string;
   isLoading: boolean;
+  /** 현재 응답에 사용 중인 모델 ID (조회 전에는 null) */
+  model: string | null;
   onChange: (value: string) => void;
   onSubmit: (e: React.FormEvent) => void;
   inputRef: React.RefObject<HTMLInputElement | null>;
+}
+
+export interface ResetChatButtonProps {
+  onReset: () => void;
 }
 
 export interface MessageActionButtonsProps {
@@ -41,6 +47,12 @@ export interface AssistantMessageProps {
   onRegenerate: (index: number) => void;
 }
 
+export interface SuggestedQuestionsProps {
+  questions: string[];
+  isLoading: boolean;
+  onSelect: (question: string) => void;
+}
+
 export interface MessageListProps {
   messages: Message[];
   isLoading: boolean;
@@ -49,4 +61,7 @@ export interface MessageListProps {
   onRegenerate: (index: number) => void;
   messagesContainerRef: React.RefObject<HTMLDivElement | null>;
   messagesEndRef: React.RefObject<HTMLDivElement | null>;
+  suggestedQuestions: string[];
+  showSuggestions: boolean;
+  onSuggestionSelect: (question: string) => void;
 }

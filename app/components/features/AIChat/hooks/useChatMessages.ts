@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import chatMessages from "@/data/chat-messages.json";
+import suggestedQuestionsData from "@/data/suggested-questions.json";
 import type { Message } from "../types";
 
 // 모든 데이터 소스를 기본으로 참조
@@ -7,8 +8,8 @@ const ALL_DATA_SOURCES = [
   "profile",
   "experience",
   "archive",
-  "resume",
   "myStory",
+  "qna",
 ];
 
 // 고유 ID 생성 함수
@@ -16,16 +17,22 @@ function generateMessageId(): string {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }
 
+function createInitialMessages(): Message[] {
+  return [{ ...chatMessages.initialMessage, id: generateMessageId() } as Message];
+}
+
 export function useChatMessages() {
-  const [messages, setMessages] = useState<Message[]>([
-    { ...chatMessages.initialMessage, id: generateMessageId() } as Message,
-  ]);
+  const [messages, setMessages] = useState<Message[]>(createInitialMessages);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+  const [model, setModel] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
+  // 초기화가 일어나면 증가시켜, 이전 요청의 응답이 새 대화에 섞이지 않도록 한다
+  const sessionRef = useRef(0);
 
   const scrollToBottom = useCallback(() => {
     if (messagesContainerRef.current) {
@@ -44,6 +51,24 @@ export function useChatMessages() {
   useEffect(() => {
     scrollToBottom();
   }, [scrollToBottom]);
+
+  // 첫 대화 전에도 사용 모델을 표시하기 위해 미리 조회
+  useEffect(() => {
+    let cancelled = false;
+
+    fetch("/api/chat")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!cancelled && data?.model) setModel(data.model);
+      })
+      .catch(() => {
+        // 표시용 정보이므로 실패해도 채팅에는 영향을 주지 않는다
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // 로딩 완료 시 포커스 복원
   useEffect(() => {
@@ -83,6 +108,10 @@ export function useChatMessages() {
       setMessages((prev) => prev.slice(0, index));
       setIsLoading(true);
 
+      const session = sessionRef.current;
+      const controller = new AbortController();
+      abortControllerRef.current = controller;
+
       try {
         // 재생성 시점까지의 히스토리 전달 (초기 메시지 제외)
         const historyUpToIndex = messages
@@ -103,11 +132,15 @@ export function useChatMessages() {
             dataSources: ALL_DATA_SOURCES,
             history: historyUpToIndex,
           }),
+          signal: controller.signal,
         });
 
         const data = await response.json();
 
+        if (sessionRef.current !== session) return;
+
         if (response.ok) {
+          if (data.model) setModel(data.model);
           setMessages((prev) => [
             ...prev,
             {
@@ -118,26 +151,32 @@ export function useChatMessages() {
           ]);
         }
       } catch (error) {
+        if (sessionRef.current !== session) return;
         console.error("Error:", error);
       } finally {
-        setIsLoading(false);
+        if (sessionRef.current === session) {
+          setIsLoading(false);
+        }
       }
     },
     [messages]
   );
 
-  const handleSubmit = useCallback(
-    async (e: React.FormEvent) => {
-      e.preventDefault();
-      if (!input.trim() || isLoading) return;
+  const sendMessage = useCallback(
+    async (rawMessage: string) => {
+      const userMessage = rawMessage.trim();
+      if (!userMessage || isLoading) return;
 
-      const userMessage = input.trim();
       setInput("");
       setMessages((prev) => [
         ...prev,
         { role: "user", content: userMessage, id: generateMessageId() },
       ]);
       setIsLoading(true);
+
+      const session = sessionRef.current;
+      const controller = new AbortController();
+      abortControllerRef.current = controller;
 
       try {
         const response = await fetch("/api/chat", {
@@ -154,11 +193,15 @@ export function useChatMessages() {
                 m.content !== chatMessages.initialMessage.content
             ),
           }),
+          signal: controller.signal,
         });
 
         const data = await response.json();
 
+        if (sessionRef.current !== session) return;
+
         if (response.ok) {
+          if (data.model) setModel(data.model);
           setMessages((prev) => [
             ...prev,
             {
@@ -178,6 +221,7 @@ export function useChatMessages() {
           ]);
         }
       } catch (error) {
+        if (sessionRef.current !== session) return;
         console.error("Error:", error);
         setMessages((prev) => [
           ...prev,
@@ -188,16 +232,52 @@ export function useChatMessages() {
           },
         ]);
       } finally {
-        setIsLoading(false);
+        if (sessionRef.current === session) {
+          setIsLoading(false);
 
-        // 응답 완료 후 포커스 복원
-        requestAnimationFrame(() => {
-          inputRef.current?.focus();
-        });
+          // 응답 완료 후 포커스 복원
+          requestAnimationFrame(() => {
+            inputRef.current?.focus();
+          });
+        }
       }
     },
-    [input, isLoading]
+    [isLoading, messages]
   );
+
+  const handleSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      sendMessage(input);
+    },
+    [sendMessage, input]
+  );
+
+  const handleSuggestionSelect = useCallback(
+    (question: string) => {
+      sendMessage(question);
+    },
+    [sendMessage]
+  );
+
+  const handleReset = useCallback(() => {
+    sessionRef.current += 1;
+    abortControllerRef.current?.abort();
+    abortControllerRef.current = null;
+
+    setMessages(createInitialMessages());
+    setInput("");
+    setIsLoading(false);
+    setCopiedIndex(null);
+
+    requestAnimationFrame(() => {
+      inputRef.current?.focus();
+    });
+  }, []);
+
+  // 대화가 시작되기 전(초기 메시지만 있을 때)에만 예시 질문 노출
+  const showSuggestions = messages.length === 1 && !isLoading;
+  const canReset = messages.length > 1 || isLoading;
 
   return {
     messages,
@@ -210,7 +290,13 @@ export function useChatMessages() {
     handleSubmit,
     handleCopy,
     handleRegenerate,
+    handleReset,
+    canReset,
+    model,
     setInput,
     scrollToBottom,
+    suggestedQuestions: suggestedQuestionsData.questions,
+    showSuggestions,
+    handleSuggestionSelect,
   };
 }

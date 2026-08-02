@@ -1,11 +1,22 @@
 import { memo, useMemo } from "react";
 import Image from "next/image";
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import profile from "@/data/profile.json";
 import MessageActionButtons from "./MessageActionButtons";
+import { normalizeMarkdown } from "../utils/markdown";
 import type { AssistantMessageProps } from "../types";
+
+// 좁은 채팅 영역에서 넓은 표가 말풍선을 밀어내지 않도록 스크롤 영역으로 감싼다
+const markdownComponents: Components = {
+  // node는 react-markdown 내부 값이므로 DOM으로 넘기지 않는다
+  table: ({ node, children, ...props }) => (
+    <div className="markdown-table">
+      <table {...props}>{children}</table>
+    </div>
+  ),
+};
 
 function AssistantMessage({
   content,
@@ -20,6 +31,7 @@ function AssistantMessage({
   // ReactMarkdown 플러그인을 메모이제이션
   const remarkPlugins = useMemo(() => [remarkGfm], []);
   const rehypePlugins = useMemo(() => [rehypeHighlight], []);
+  const markdown = useMemo(() => normalizeMarkdown(content), [content]);
 
   return (
     <>
@@ -41,8 +53,9 @@ function AssistantMessage({
           <ReactMarkdown
             remarkPlugins={remarkPlugins}
             rehypePlugins={rehypePlugins}
+            components={markdownComponents}
           >
-            {content}
+            {markdown}
           </ReactMarkdown>
         </div>
         <MessageActionButtons

@@ -2,8 +2,8 @@ import {
   getProfileSync,
   getExperiencesSync,
   getProjectsSync,
-  getResumeSync,
   getMyStorySync,
+  getQnaSync,
 } from "@/lib/data/loaders";
 
 /**
@@ -28,7 +28,8 @@ ${profile.about.paragraphs.join("\n\n")}
 
 ## 나의 기술 스택:
 - 웹 개발: ${profile.skills.webDevelopment.join(", ")}
-- 게임 & 그래픽스: ${profile.skills.gameAndGraphics.join(", ")}
+- AI & 자동화: ${profile.skills.aiAndAutomation.join(", ")}
+- 그래픽스 & 인터랙티브: ${profile.skills.graphicsAndInteractive.join(", ")}
 - DevOps & Tools: ${profile.skills.devOpsAndTools.join(", ")}
 
 ## 나의 학력:
@@ -43,8 +44,8 @@ ${profile.certifications
 
 ## 연락처:
 - 이메일: ${profile.contact.email}
-- 전화: ${profile.contact.phone}
-- GitHub: ${profile.contact.github}`);
+- GitHub: ${profile.contact.github}
+- LinkedIn: ${profile.contact.linkedin}`);
     }
   }
 
@@ -97,21 +98,23 @@ ${projects
     }
   }
 
-  if (dataSources.includes("resume")) {
-    const resume = getResumeSync();
-    if (resume) {
-      sections.push(`
-## 나의 이력서 (Resume):
-${resume}`);
-    }
-  }
-
   if (dataSources.includes("myStory")) {
     const myStory = getMyStorySync();
     if (myStory) {
       sections.push(`
 ## 나의 개인 스토리 (My Story):
 ${myStory}`);
+    }
+  }
+
+  if (dataSources.includes("qna")) {
+    const qna = getQnaSync();
+    if (qna) {
+      sections.push(`
+## 자주 받는 질문과 답변 (Q&A):
+아래는 자주 받는 질문에 대한 나의 실제 답변 자료입니다.
+비슷한 질문을 받으면 이 내용을 근거로 답변하되, 그대로 복사하지 말고 질문에 맞게 요약해서 답변하세요.
+${qna}`);
     }
   }
 
@@ -185,14 +188,14 @@ ${promptSections}
 
 **질문**: "React 경험 있나요?"
 **답변**:
-네, 있어요! 네오위즈에서 React로 여러 게임 마케팅 사이트를 개발했어요.
+네, 있어요! 실시간 웹 애플리케이션과 사내 도구를 React로 개발했어요.
 
 
-> 📌 **네오위즈 - FS개발팀 (2023.04 - 2024.11)**
+> 📌 **네오위즈 - 퍼플CSI팀 (2022.05 - 현재)**
 >
-> **Browndust2 공식 사이트**: React, TypeScript로 글로벌 웹사이트 개발
+> **사내 운영 도구**: React, TypeScript로 비주얼 에디터·배포 관리 도구 개발
 >
-> **SLOT MART**: React 기반 HTML5 게임 플랫폼 구축
+> **SLOT MART**: React·WebSocket 기반 실시간 웹 애플리케이션 구축
 
 ---
 

@@ -147,17 +147,17 @@ export function getFeaturedProjectsSync(): Project[] {
 // ============================================
 
 /**
- * 이력서 마크다운 로드 (비동기)
+ * 예시 질문 답변(Q&A) 마크다운 로드 (비동기)
  */
-export async function getResume(): Promise<string | null> {
-  return loadTextAsync("resume.md");
+export async function getQna(): Promise<string | null> {
+  return loadTextAsync("qna.md");
 }
 
 /**
- * 이력서 마크다운 로드 (동기)
+ * 예시 질문 답변(Q&A) 마크다운 로드 (동기)
  */
-export function getResumeSync(): string | null {
-  return loadTextSync("resume.md");
+export function getQnaSync(): string | null {
+  return loadTextSync("qna.md");
 }
 
 /**

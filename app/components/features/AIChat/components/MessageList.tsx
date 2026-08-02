@@ -1,6 +1,7 @@
 import UserMessage from "./UserMessage";
 import AssistantMessage from "./AssistantMessage";
 import LoadingIndicator from "./LoadingIndicator";
+import SuggestedQuestions from "./SuggestedQuestions";
 import type { MessageListProps } from "../types";
 
 export default function MessageList({
@@ -11,6 +12,9 @@ export default function MessageList({
   onRegenerate,
   messagesContainerRef,
   messagesEndRef,
+  suggestedQuestions,
+  showSuggestions,
+  onSuggestionSelect,
 }: MessageListProps) {
   return (
     <div
@@ -22,7 +26,9 @@ export default function MessageList({
         return (
           <div
             key={message.id || index}
-            className={`flex flex-col gap-3 ${isLastMessage ? "pb-12" : ""}`}
+            className={`flex min-w-0 flex-col gap-3 ${
+              isLastMessage && !showSuggestions ? "pb-12" : ""
+            }`}
           >
             {message.role === "user" ? (
               <UserMessage content={message.content} />
@@ -42,6 +48,13 @@ export default function MessageList({
         );
       })}
       {isLoading && <LoadingIndicator />}
+      {showSuggestions && (
+        <SuggestedQuestions
+          questions={suggestedQuestions}
+          isLoading={isLoading}
+          onSelect={onSuggestionSelect}
+        />
+      )}
       <div ref={messagesEndRef} />
     </div>
   );

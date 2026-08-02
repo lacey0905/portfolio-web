@@ -9,20 +9,13 @@ export interface Profile {
   };
   skills: {
     webDevelopment: string[];
-    gameAndGraphics: string[];
+    aiAndAutomation: string[];
+    graphicsAndInteractive: string[];
     devOpsAndTools: string[];
   };
-  experience: Experience[];
   education: Education[];
   certifications: Certification[];
   contact: Contact;
-}
-
-export interface Experience {
-  company: string;
-  position: string;
-  period: string;
-  description: string;
 }
 
 export interface Education {
@@ -39,6 +32,6 @@ export interface Certification {
 
 export interface Contact {
   email: string;
-  phone: string;
   github: string;
+  linkedin: string;
 }

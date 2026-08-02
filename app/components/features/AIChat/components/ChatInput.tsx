@@ -1,9 +1,20 @@
 import { memo } from "react";
 import type { ChatInputProps } from "../types";
 
+// "gemini-3.6-flash" -> "Gemini 3.6 Flash"
+function formatModelName(id: string): string {
+  return id
+    .split("-")
+    .map((part) =>
+      part === "gemini" ? "Gemini" : part.charAt(0).toUpperCase() + part.slice(1)
+    )
+    .join(" ");
+}
+
 function ChatInput({
   value,
   isLoading,
+  model,
   onChange,
   onSubmit,
   inputRef,
@@ -54,6 +65,12 @@ function ChatInput({
         </div>
       </form>
       <p className="mt-2 text-center text-xs text-slate-500/80 px-2">
+        {model && (
+          <span className="inline-block" title={model}>
+            <span className="text-slate-400">{formatModelName(model)}</span>
+            <span className="mx-1.5 text-slate-600">·</span>
+          </span>
+        )}
         <span className="inline-block">
           AI가 생성한 답변은 부정확할 수 있습니다.
         </span>{" "}

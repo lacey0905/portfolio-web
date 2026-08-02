@@ -2,7 +2,23 @@ import { NextRequest, NextResponse } from "next/server";
 import { getProfileSync } from "@/lib/data/loaders";
 import { generateSystemPrompt, generatePromptSections } from "@/lib/ai/prompts";
 import { generateChatResponse, validateApiKey } from "@/lib/ai/gemini";
+import { resolveChatModel } from "@/lib/ai/models";
 import { validateEnv } from "@/lib/env";
+
+/**
+ * 첫 응답 전에도 사용 모델을 표시할 수 있도록 현재 선택된 모델을 알려준다.
+ */
+export async function GET() {
+  if (!validateApiKey()) {
+    return NextResponse.json(
+      { error: "Gemini API 키가 설정되지 않았습니다." },
+      { status: 500 }
+    );
+  }
+
+  const model = await resolveChatModel();
+  return NextResponse.json({ model });
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -19,7 +35,7 @@ export async function POST(request: NextRequest) {
 
     const {
       message,
-      dataSources = ["profile", "experience", "archive", "resume", "myStory"],
+      dataSources = ["profile", "experience", "archive", "myStory", "qna"],
       history = [],
     } = await request.json();
 
@@ -56,13 +72,13 @@ export async function POST(request: NextRequest) {
     const systemPrompt = generateSystemPrompt(name, promptSections);
 
     // AI 응답 생성 (전체 대화 히스토리 포함)
-    const responseText = await generateChatResponse(
+    const { text, model } = await generateChatResponse(
       systemPrompt,
       message,
       history
     );
 
-    return NextResponse.json({ message: responseText });
+    return NextResponse.json({ message: text, model });
   } catch (error: any) {
     console.error("Error in chat API:", error);
 

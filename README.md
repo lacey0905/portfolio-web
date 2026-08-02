@@ -115,6 +115,7 @@ portfolio-web/
 │   │   │   ├── AboutSection/
 │   │   │   ├── ArchiveSection/
 │   │   │   ├── ExperienceSection/
+│   │   │   ├── SkillsSection/
 │   │   │   └── Footer/
 │   │   ├── ui/                       # 공통 UI 컴포넌트
 │   │   │   ├── ArrowRightIcon.tsx
@@ -136,7 +137,8 @@ portfolio-web/
 │   ├── experience.json               # 경력 정보
 │   ├── myStory.md                    # 개인 스토리
 │   ├── profile.json                  # 프로필 정보
-│   └── resume.md                     # 이력서
+│   ├── qna.md                        # 예시 질문 답변 자료
+│   └── suggested-questions.json      # 채팅 예시 질문 목록
 ├── lib/                              # 유틸리티 라이브러리
 │   ├── ai/
 │   │   ├── gemini.ts                 # Gemini AI 설정
@@ -149,8 +151,7 @@ portfolio-web/
 │   ├── archive/
 │   │   ├── browndust2.jpg
 │   │   └── lies_of_p.jpg
-│   ├── KIM-HYEON-GYOUN.jpg
-│   └── resume.pdf
+│   └── KIM-HYEON-GYOUN.jpg
 ├── types/                            # TypeScript 타입 정의
 │   ├── experience.ts
 │   ├── profile.ts
@@ -199,21 +200,29 @@ portfolio-web/
 ```json
 {
   "name": "이름",
+  "nameEn": "Name",
   "role": "역할",
-  "bio": "자기소개",
-  "skills": {
-    "frontend": ["React", "Next.js"],
-    "backend": ["Node.js", "Python"],
-    "tools": ["Git", "Docker"]
+  "birth": "YYYY.MM.DD",
+  "about": {
+    "paragraphs": ["자기소개 문단"],
+    "highlights": { "키워드": "https://link" }
   },
-  "experience": [],
+  "skills": {
+    "webDevelopment": ["React", "Next.js"],
+    "aiAndAutomation": ["LLM API 연동"],
+    "graphicsAndInteractive": ["WebGL"],
+    "devOpsAndTools": ["Git", "CI/CD"]
+  },
   "education": [],
+  "certifications": [],
   "contact": {
     "email": "your@email.com",
     "github": "https://github.com/username"
   }
 }
 ```
+
+> 상세 경력과 프로젝트는 `data/experience.json`에서 별도로 관리합니다.
 
 ## AI 채팅 기능
 

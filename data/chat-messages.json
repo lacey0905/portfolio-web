@@ -1,6 +1,6 @@
 {
   "initialMessage": {
     "role": "assistant",
-    "content": "👋 안녕하세요!\n\nFrontend Engineer 김현균에 대해 궁금하신가요?\n저는 그의 경력과 기술을 학습한 AI 어시스턴트입니다.\n\n✨ 이런 것들을 물어보실 수 있어요:\n\n• React, TypeScript, WebGL 실무 경험\n• 게임 웹 프론트엔드 & 마케팅 사이트 개발 이력\n• 성능 최적화, CI/CD 구축 등 기술적 접근\n• 또는 JD를 붙여넣으면 포지션 적합도 분석까지!\n\n💬 편하게 대화하듯 질문해주세요. Gemini API가 실시간으로 답변합니다."
+    "content": "👋 안녕하세요!\n\nFrontend Engineer 김현균의 경력과 기술을 학습한 AI 어시스턴트입니다.\n\n아래 예시 질문을 눌러 보셔도 되고, 채용공고를 붙여넣으면 포지션 적합도를 분석해 드려요.\n\n💬 편하게 질문해 주세요."
   }
 }
